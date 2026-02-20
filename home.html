@@ -1,0 +1,3648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LittleExplorers | Learning Through Play</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Your existing styles - keep them exactly as they are */
+        /* Your existing styles - keep them exactly as they are */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Light Theme (Default) */
+            --primary: #4ECDC4;
+            --secondary: #FF6B6B;
+            --accent: #FFD166;
+            --blue: #118AB2;
+            --purple: #9D6BFF;
+            --light: #F7FFF7;
+            --dark: #2A2D34;
+            --text: #333333;
+            --bg-primary: #F4F7FC;
+            --bg-secondary: white;
+            --card-bg: white;
+            --border-color: #e0e0e0;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            --hover-bg: #f0f9f8;
+            --input-bg: white;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --info: #2196F3;
+            --radius: 16px;
+            
+            /* Global Settings Variables */
+            --font-scale: 1;
+            --spacing-scale: 1;
+            --currency-symbol: 'KSh';
+            --shipping-rate: '150';
+            --animation-speed: 0.3s;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --primary: #5FD0C7;
+            --secondary: #FF8585;
+            --accent: #FFD966;
+            --blue: #3AA5D9;
+            --purple: #B58BFF;
+            --light: #2A2D34;
+            --dark: #F7FFF7;
+            --text: #E0E0E0;
+            --bg-primary: #1A1C20;
+            --bg-secondary: #2A2D34;
+            --card-bg: #2A2D34;
+            --border-color: #404040;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            --hover-bg: #3A3D44;
+            --input-bg: #1A1C20;
+            --radius: 16px;
+            
+            /* Global Settings Variables - Dark Mode */
+            --font-scale: 1;
+            --spacing-scale: 1;
+            --currency-symbol: 'KSh';
+            --shipping-rate: '150';
+            --animation-speed: 0.3s;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        header {
+            background-color: var(--bg-secondary);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            padding: 15px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary);
+            text-shadow: 2px 2px 0 rgba(78, 205, 196, 0.2);
+        }
+        
+        .logo i {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+        
+        nav li {
+            margin-left: 30px;
+            position: relative;
+        }
+        
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            padding: 5px 0;
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--accent);
+            transition: width 0.3s;
+            border-radius: 3px;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        .header-actions {
+            display: flex;
+            align-items: center;
+        }
+        
+        .header-actions a {
+            margin-left: 20px;
+            color: var(--text);
+            font-size: 18px;
+            transition: color 0.3s;
+            position: relative;
+        }
+        
+        .header-actions a:hover {
+            color: var(--secondary);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--secondary);
+            color: white;
+            font-size: 12px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .account-btn {
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            color: white !important;
+            padding: 10px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 15px !important;
+            box-shadow: 0 4px 10px rgba(78, 205, 196, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .account-btn:hover {
+            transform: translateY(-3px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(78, 205, 196, 0.1) 0%, rgba(255, 209, 102, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background-color: var(--accent);
+            border-radius: 50%;
+            top: -200px;
+            right: -100px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hero::after {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: var(--secondary);
+            border-radius: 50%;
+            bottom: -150px;
+            left: -100px;
+            opacity: 0.1;
+            z-index: 0;
+        }
+        
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero-text {
+            flex: 1;
+            padding-right: 50px;
+        }
+        
+        .hero-text h1 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 56px;
+            color: var(--text);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            font-weight: 800;
+        }
+        
+        .hero-text h1 span {
+            color: var(--primary);
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero-text h1 span::after {
+            content: '';
+            position: absolute;
+            bottom: 5px;
+            left: 0;
+            width: 100%;
+            height: 10px;
+            background-color: rgba(255, 209, 102, 0.4);
+            z-index: -1;
+            border-radius: 5px;
+        }
+        
+        .hero-text p {
+            font-size: 18px;
+            margin-bottom: 35px;
+            color: var(--text);
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, var(--secondary), #FF8E8E);
+            color: white;
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+            font-size: 16px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(255, 107, 107, 0.4);
+        }
+        
+        .hero-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 8px solid var(--card-bg);
+        }
+        
+        /* Age Explorer */
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+        
+        .section-title h2 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 42px;
+            color: var(--text);
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+        
+        .section-title p {
+            color: var(--text);
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 18px;
+        }
+        
+        .age-explorer {
+            padding: 80px 0;
+        }
+        
+        .age-explorer-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .age-slider {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 50px;
+            width: 100%;
+            position: relative;
+        }
+        
+        .age-slider::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background-color: var(--border-color);
+            border-radius: 2px;
+            transform: translateY(-50%);
+            z-index: 0;
+        }
+        
+        .age-marker {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 30px;
+            position: relative;
+            z-index: 1;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .age-marker:hover .marker-dot {
+            transform: scale(1.3);
+        }
+        
+        .age-marker.active .marker-dot {
+            transform: scale(1.2);
+            background-color: var(--secondary);
+            box-shadow: 0 0 0 8px rgba(255, 107, 107, 0.2);
+        }
+        
+        .marker-dot {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            margin-bottom: 15px;
+            transition: all 0.3s;
+        }
+        
+        .age-label {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--text);
+            text-align: center;
+            background-color: var(--card-bg);
+            padding: 5px 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 1px solid var(--border-color);
+        }
+        
+        .age-details {
+            background-color: var(--card-bg);
+            border-radius: var(--radius);
+            padding: 40px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            display: none;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        .age-details.active {
+            display: block;
+        }
+        
+        @keyframes fadeInUp {
+            from { 
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .age-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .age-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 24px;
+            color: white;
+        }
+        
+        .age-0 { background-color: var(--primary); }
+        .age-1 { background-color: var(--secondary); }
+        .age-2 { background-color: var(--accent); }
+        .age-3 { background-color: var(--blue); }
+        .age-4 { background-color: var(--purple); }
+        
+        .age-header h3 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 28px;
+            color: var(--text);
+        }
+        
+        .age-header p {
+            color: var(--text);
+            opacity: 0.8;
+            font-size: 16px;
+        }
+        
+        .age-products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+        
+        .product-item {
+            background-color: var(--hover-bg);
+            border-radius: 12px;
+            padding: 20px;
+            transition: all 0.3s;
+            border-left: 5px solid var(--primary);
+        }
+        
+        .product-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .product-item h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        
+        .product-item p {
+            font-size: 14px;
+            color: var(--text);
+            opacity: 0.8;
+        }
+        
+        /* Family Hub */
+        .family-hub {
+            padding: 100px 0;
+            background: linear-gradient(135deg, rgba(17, 138, 178, 0.1) 0%, rgba(157, 107, 255, 0.1) 100%);
+            border-radius: 40px;
+            margin: 80px 0;
+        }
+        
+        .family-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .family-content {
+            flex: 1;
+            padding-right: 60px;
+        }
+        
+        .family-content h2 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 42px;
+            color: var(--text);
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+        
+        .family-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            color: var(--text);
+            opacity: 0.9;
+        }
+        
+        .family-features {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .family-feature {
+            background-color: var(--card-bg);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .family-feature:hover {
+            transform: translateY(-5px);
+        }
+        
+        .family-feature i {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+        
+        .family-feature h4 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        
+        .family-feature p {
+            font-size: 14px;
+            margin-bottom: 0;
+            color: var(--text);
+            opacity: 0.8;
+        }
+        
+        .family-image {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        
+        .family-image img {
+            max-width: 100%;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border: 8px solid var(--card-bg);
+        }
+        
+        /* ===== NEW LEARNING KIT BUILDER SECTION ===== */
+        .kit-builder {
+            padding: 100px 0 80px;
+            background: var(--bg-primary);
+            border-radius: 60px 60px 0 0;
+            margin-top: 60px;
+        }
+        
+        .kit-header-area {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 50px;
+        }
+        
+        .kit-header-area h2 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--text);
+        }
+        
+        .kit-header-area h2 span {
+            color: var(--secondary);
+            position: relative;
+        }
+        
+        .kit-badge {
+            background: var(--accent);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 18px;
+            color: var(--dark);
+            box-shadow: var(--shadow);
+        }
+        
+        .kit-badge i {
+            color: var(--secondary);
+            margin-right: 8px;
+        }
+        
+        .builder-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            margin-top: 20px;
+        }
+        
+        /* Design Panel */
+        .design-panel {
+            background: var(--card-bg);
+            border-radius: 40px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+        }
+        
+        .design-panel h3 {
+            font-size: 26px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 700;
+            margin-bottom: 30px;
+            color: var(--blue);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .option-block {
+            margin-bottom: 40px;
+            border-bottom: 2px dashed var(--border-color);
+            padding-bottom: 35px;
+        }
+        
+        .option-block:last-child {
+            border-bottom: none;
+        }
+        
+        .option-block h4 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .chip-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 14px;
+        }
+        
+        .chip {
+            background: var(--hover-bg);
+            padding: 14px 26px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            border: 2px solid transparent;
+            transition: all 0.2s;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--text);
+        }
+        
+        .chip i {
+            color: var(--primary);
+            font-size: 16px;
+        }
+        
+        .chip.selected {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .chip.selected i {
+            color: white;
+        }
+        
+        .chip:hover:not(.selected) {
+            background: var(--hover-bg);
+            border-color: var(--primary);
+        }
+        
+        .slider-container {
+            background: var(--hover-bg);
+            padding: 25px;
+            border-radius: 28px;
+        }
+        
+        .skill-row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0 5px;
+            color: var(--text);
+        }
+        
+        .skill-label i {
+            color: var(--purple);
+            width: 24px;
+            margin-right: 10px;
+        }
+        
+        .slider {
+            width: 100%;
+            margin: 10px 0 20px;
+            accent-color: var(--secondary);
+            height: 8px;
+            border-radius: 10px;
+        }
+        
+        .theme-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .theme-card {
+            background: var(--hover-bg);
+            padding: 20px 10px;
+            border-radius: 20px;
+            text-align: center;
+            font-weight: 600;
+            border: 3px solid transparent;
+            transition: 0.15s;
+            cursor: pointer;
+            color: var(--text);
+        }
+        
+        .theme-card i {
+            font-size: 28px;
+            display: block;
+            margin-bottom: 12px;
+            color: var(--blue);
+        }
+        
+        .theme-card.selected {
+            border-color: var(--secondary);
+            background: var(--hover-bg);
+        }
+        
+        /* Kit Preview Panel */
+        .preview-panel {
+            background: var(--card-bg);
+            border-radius: 40px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            border: 2px solid var(--border-color);
+            position: relative;
+        }
+        
+        .preview-stamp {
+            background: var(--accent);
+            display: inline-block;
+            padding: 8px 22px;
+            border-radius: 40px;
+            font-weight: 800;
+            margin-bottom: 25px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+        
+        .kit-title {
+            font-size: 28px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text);
+        }
+        
+        .kit-theme-badge {
+            color: var(--blue);
+            font-weight: 600;
+            margin-bottom: 25px;
+            font-size: 16px;
+        }
+        
+        .kit-items {
+            background: var(--hover-bg);
+            backdrop-filter: blur(4px);
+            padding: 25px;
+            border-radius: 28px;
+            margin: 25px 0;
+        }
+        
+        .kit-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .kit-item:last-child {
+            border-bottom: none;
+        }
+        
+        .kit-item i {
+            width: 32px;
+            color: var(--secondary);
+            font-size: 18px;
+        }
+        
+        .kit-item span {
+            flex: 1;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .kit-price-tag {
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--blue);
+            margin: 15px 0;
+        }
+        
+        .btn-build {
+            background: linear-gradient(145deg, var(--secondary), #FF8E8E);
+            color: white;
+            border: none;
+            padding: 18px 30px;
+            width: 100%;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: 0.25s;
+            box-shadow: 0 12px 25px rgba(255,107,107,0.3);
+            margin-top: 20px;
+        }
+        
+        .btn-build:hover {
+            transform: scale(1.02);
+            background: #ff5252;
+        }
+        
+        .expert-note {
+            background: var(--hover-bg);
+            border-radius: 20px;
+            padding: 18px;
+            margin-top: 30px;
+            border-left: 8px solid var(--primary);
+            font-style: italic;
+            color: var(--text);
+        }
+        
+        .empty-kit {
+            color: var(--text);
+            opacity: 0.5;
+            text-align: center;
+            padding: 30px 0;
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .cta-box {
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            color: white;
+            padding: 70px 40px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-box::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            top: -150px;
+            right: -100px;
+        }
+        
+        .cta-box h2 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 42px;
+            margin-bottom: 20px;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-box p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button-light {
+            display: inline-block;
+            background-color: var(--card-bg);
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            font-size: 16px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-button-light:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+            color: var(--blue);
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: rgb(26, 25, 25);
+            padding: 80px 0 30px;
+            border-radius: 40px 40px 0 0;
+            margin-top: 80px;
+        }
+        
+        .footer-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .footer-column h3 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 22px;
+            margin-bottom: 25px;
+            color: var(--primary);
+            font-weight: 800;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 15px;
+        }
+        
+        .footer-column ul li a {
+            color: #080808;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 15px;
+        }
+        
+        .footer-column ul li a:hover {
+            color: var(--accent);
+        }
+        
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgb(5, 5, 5);
+            border-radius: 50%;
+            color: rgb(255, 254, 254);
+            font-size: 18px;
+            transition: all 0.3s;
+        }
+        
+        .social-icons a:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text);
+            opacity: 0.6;
+            font-size: 14px;
+        }
+        
+        /* ===== PRODUCTS SECTION ===== */
+        .products-section {
+            padding: 80px 0;
+            background: var(--bg-primary);
+        }
+        
+        .category-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+        }
+        
+        .category-tab {
+            padding: 14px 28px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            border-radius: 50px;
+            font-weight: 600;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 15px;
+        }
+        
+        .category-tab i {
+            color: var(--primary);
+            font-size: 16px;
+        }
+        
+        .category-tab:hover {
+            border-color: var(--primary);
+            background: var(--hover-bg);
+        }
+        
+        .category-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .category-tab.active i {
+            color: white;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 25px 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.03);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 35px rgba(78, 205, 196, 0.15);
+            border-color: var(--primary);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--accent);
+            padding: 6px 15px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .product-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            background: var(--hover-bg);
+            border-radius: 16px;
+            padding: 20px;
+        }
+        
+        .product-image i {
+            font-size: 80px;
+            color: var(--primary);
+        }
+        
+        .product-category {
+            color: var(--blue);
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        
+        .product-category i {
+            font-size: 14px;
+        }
+        
+        .product-title {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text);
+            line-height: 1.3;
+        }
+        
+        .product-description {
+            color: var(--text);
+            opacity: 0.7;
+            font-size: 14px;
+            margin-bottom: 20px;
+            line-height: 1.6;
+            flex: 1;
+        }
+        
+        .product-price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .product-price {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--secondary);
+        }
+        
+        .product-price span {
+            font-size: 16px;
+            font-weight: 400;
+            color: var(--text);
+            opacity: 0.4;
+            text-decoration: line-through;
+            margin-left: 8px;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 12px;
+            margin-top: auto;
+        }
+        
+        .btn-add-to-cart {
+            flex: 2;
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            color: white;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .btn-add-to-cart:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 20px rgba(78, 205, 196, 0.3);
+        }
+        
+        .btn-more-info {
+            flex: 1;
+            background: var(--card-bg);
+            color: var(--text);
+            border: 2px solid var(--border-color);
+            padding: 14px 10px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .btn-more-info:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-inquiry {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text);
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        
+        .btn-inquiry:hover {
+            border-color: var(--secondary);
+            color: var(--secondary);
+            background: var(--hover-bg);
+        }
+        
+        /* Product Modal */
+        .product-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .product-modal.active {
+            display: flex;
+        }
+        
+        .product-modal-content {
+            max-width: 800px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            padding: 40px;
+            background: var(--card-bg);
+            border-radius: 30px;
+            animation: modalSlideUp 0.3s ease;
+        }
+        
+        .close-modal {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: 300;
+            color: var(--text);
+            opacity: 0.5;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        
+        .close-modal:hover {
+            color: var(--secondary);
+            opacity: 1;
+        }
+        
+        @keyframes modalSlideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+        
+        /* Cart Notification */
+        .cart-notification {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            padding: 16px 28px;
+            border-radius: 50px;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(78,205,196,0.3);
+            display: none;
+            align-items: center;
+            gap: 12px;
+            z-index: 999;
+            animation: slideInRight 0.3s ease;
+        }
+        
+        .cart-notification.show {
+            display: flex;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        /* ===== OUR EXPERTS SECTION ===== */
+        .experts-section {
+            padding: 80px 0;
+            background: var(--bg-primary);
+        }
+        
+        .hospitals-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 50px 0;
+        }
+        
+        .hospital-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 35px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        
+        .hospital-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 15px 35px rgba(78,205,196,0.15);
+        }
+        
+        .hospital-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--hover-bg);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .hospital-icon i {
+            font-size: 35px;
+            color: var(--primary);
+        }
+        
+        .hospital-card h3 {
+            font-size: 22px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+        
+        .hospital-card p {
+            color: var(--text);
+            opacity: 0.7;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .hospital-branches {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            font-size: 14px;
+            color: var(--blue);
+        }
+        
+        .btn-expert {
+            display: inline-block;
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        
+        .btn-expert:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .clinics-section {
+            margin: 60px 0;
+        }
+        
+        .clinics-section h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .clinics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+        
+        .clinic-card {
+            background: var(--card-bg);
+            border-radius: 30px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .clinic-card.featured {
+            border: 3px solid var(--accent);
+            background: var(--card-bg);
+        }
+        
+        .clinic-badge {
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: var(--accent);
+            color: var(--dark);
+            padding: 8px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(255,209,102,0.3);
+        }
+        
+        .clinic-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .clinic-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--hover-bg);
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .clinic-icon i {
+            font-size: 30px;
+            color: var(--secondary);
+        }
+        
+        .clinic-header h4 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: var(--text);
+        }
+        
+        .doctor-name {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 14px;
+        }
+        
+        .clinic-description {
+            color: var(--text);
+            opacity: 0.7;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .clinic-services {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+        
+        .clinic-services span {
+            background: var(--hover-bg);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 13px;
+            color: var(--blue);
+        }
+        
+        .clinic-locations {
+            display: flex;
+            gap: 15px;
+            margin: 15px 0;
+            font-size: 14px;
+            color: var(--purple);
+        }
+        
+        .btn-clinic {
+            background: linear-gradient(135deg, var(--secondary), #FF8E8E);
+            color: white;
+            padding: 14px 25px;
+            border-radius: 30px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        
+        .btn-clinic-small {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        
+        .btn-clinic-small:hover {
+            color: var(--secondary);
+            gap: 12px;
+        }
+        
+        .specialists-section {
+            margin: 60px 0;
+        }
+        
+        .specialists-section h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 30px;
+            color: var(--text);
+        }
+        
+        .specialists-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+        }
+        
+        .specialist-card {
+            background: var(--card-bg);
+            border-radius: 25px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        
+        .specialist-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--purple);
+        }
+        
+        .specialist-avatar {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(145deg, var(--purple), #B794F4);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: white;
+            font-size: 40px;
+        }
+        
+        .specialist-card h4 {
+            font-size: 18px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+        
+        .specialty {
+            color: var(--purple);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .hospital {
+            color: var(--text);
+            opacity: 0.6;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-specialist {
+            background: transparent;
+            border: 2px solid var(--purple);
+            color: var(--purple);
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: 0.3s;
+        }
+        
+        .btn-specialist:hover {
+            background: var(--purple);
+            color: white;
+        }
+        
+        .booking-section {
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            border-radius: 40px;
+            padding: 50px;
+            margin-top: 60px;
+            color: white;
+        }
+        
+        .booking-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .booking-content h3 {
+            font-size: 32px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .booking-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.95;
+        }
+        
+        .platform-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .platform-btn {
+            background: var(--card-bg);
+            color: var(--primary);
+            padding: 16px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+            font-size: 16px;
+        }
+        
+        .platform-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        .platform-btn.vezeeta {
+            background: #2C3E50;
+            color: white;
+        }
+        
+        .disclaimer {
+            font-size: 14px !important;
+            opacity: 0.8 !important;
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 30px;
+            margin-top: 30px;
+        }
+        
+        .disclaimer i {
+            margin-right: 8px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .hero-text {
+                padding-right: 0;
+                margin-bottom: 50px;
+                text-align: center;
+            }
+            
+            .family-container {
+                flex-direction: column;
+            }
+            
+            .family-content {
+                padding-right: 0;
+                margin-bottom: 50px;
+                text-align: center;
+            }
+            
+            .age-slider {
+                flex-wrap: wrap;
+            }
+            
+            .age-marker {
+                margin: 10px 20px;
+            }
+            
+            .builder-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 42px;
+            }
+            
+            .section-title h2 {
+                font-size: 32px;
+            }
+            
+            .family-features {
+                grid-template-columns: 1fr;
+            }
+            
+            nav ul {
+                display: none;
+            }
+            
+            .cta-box h2 {
+                font-size: 32px;
+            }
+            
+            .kit-header-area {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+            
+            .theme-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category-tabs {
+                gap: 10px;
+            }
+            
+            .category-tab {
+                padding: 10px 18px;
+                font-size: 13px;
+            }
+            
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-modal-content {
+                padding: 30px 20px;
+            }
+            
+            .clinics-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .platform-buttons {
+                flex-direction: column;
+            }
+            
+            .booking-section {
+                padding: 30px 20px;
+            }
+            
+            .booking-content h3 {
+                font-size: 24px;
+            }
+        }
+
+</style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-child"></i>
+                LittleExplorers
+            </div>
+            
+            <nav>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#explorer">Age Explorer</a></li>
+                    <li><a href="#learning">Learning Kits</a></li>
+                    <li><a href="family-hub.html">Family Hub</a></li>
+                    <li><a href="#experts">Our Experts</a></li>
+                    <!-- ADMIN BUTTON - Hidden by default, shown only to admin users after Firebase setup -->
+                    <li id="adminNavItem" style="display: none;">
+                        <a href="admin-dashboard.html" class="admin-btn" style="background: var(--purple); color: white; padding: 8px 20px; border-radius: 30px; font-weight: 700; display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-crown"></i> Admin
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="header-actions">
+               
+                <a href="cart.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </a>
+                <a href="index.html" class="account-btn"><i class="fas fa-user"></i> Sign In</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Learning Through <span>Play</span> at Every Age</h1>
+                <p>Discover educational toys, kits, and resources specifically designed to support your child's developmental milestones. Our age-based recommendations make finding the perfect learning tools simple.</p>
+                <a href="#explorer" class="cta-button">Explore By Age <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="hero-image">
+                <video autoplay loop muted playsinline style="max-width: 100%; border-radius: var(--radius); box-shadow: var(--shadow); border: 8px solid white;">
+                    <source src="kids playing.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </section>
+
+    <!-- Age Explorer -->
+    <section class="age-explorer" id="explorer">
+        <div class="container">
+            <div class="section-title">
+                <h2>Discover By Developmental Stage</h2>
+                <p>Our educational experts match products to key cognitive, physical, and social milestones</p>
+            </div>
+            
+            <div class="age-explorer-container">
+                <div class="age-slider">
+                    <div class="age-marker active" data-age="0">
+                        <div class="marker-dot"></div>
+                        <div class="age-label">0-12 Months</div>
+                    </div>
+                    <div class="age-marker" data-age="1">
+                        <div class="marker-dot"></div>
+                        <div class="age-label">1-2 Years</div>
+                    </div>
+                    <div class="age-marker" data-age="2">
+                        <div class="marker-dot"></div>
+                        <div class="age-label">2-3 Years</div>
+                    </div>
+                    <div class="age-marker" data-age="3">
+                        <div class="marker-dot"></div>
+                        <div class="age-label">3-5 Years</div>
+                    </div>
+                    <div class="age-marker" data-age="4">
+                        <div class="marker-dot"></div>
+                        <div class="age-label">5+ Years</div>
+                    </div>
+                </div>
+                
+                <!-- Age 0-12 Months -->
+                <div class="age-details active" id="age-0-details">
+                    <div class="age-header">
+                        <div class="age-icon age-0">
+                            <i class="fas fa-baby"></i>
+                        </div>
+                        <div>
+                            <h3>0-12 Months: Sensory Explorers</h3>
+                            <p>Products that stimulate senses and support early cognitive development</p>
+                        </div>
+                    </div>
+                    
+                    <div class="age-products">
+                        <div class="product-item">
+                            <h4>High-Contrast Mobiles</h4>
+                            <p>Visual stimulation toys to support developing eyesight and tracking skills.</p>
+                        </div>
+                        <div class="product-item">
+                            <h4>Textured Sensory Balls</h4>
+                            <p>Different textures and gentle sounds to develop touch and hearing senses.</p>
+                        </div>
+                        <div class="product-item">
+                            <h4>Soft Activity Gyms</h4>
+                            <p>Encourage reaching, grasping, and tummy time with safe, colorful activities.</p>
+                        </div>
+                        <div class="product-item">
+                            <h4>First Sound Books</h4>
+                            <p>Crinkle books and gentle rattles to introduce cause-and-effect relationships.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Age 1-2 Years -->
+                <div class="age-details" id="age-1-details">
+                    <div class="age-header">
+                        <div class="age-icon age-1">
+                            <i class="fas fa-walking"></i>
+                        </div>
+                        <div>
+                            <h3>1-2 Years: Active Discoverers</h3>
+                            <p>Toys that encourage movement, problem-solving, and language development</p>
+                        </div>
+                    </div>
+                    
+                    <div class="age-products">
+                        <div class="product-item">
+                            <h4>Push & Pull Walkers</h4>
+                            <p>Support early walking while incorporating shape sorting and cause-effect play.</p>
+                        </div>
+                        <div class="product-item">
+                            <h4>Stacking & Nesting Toys</h4>
+                            <p>Develop fine motor skills, spatial awareness, and size discrimination.</p>
+                        </div>
+                        <div class="product-item">
+                            <h4>First Words Picture Books</h4>
+                            <p>Durable board books with realistic images to build vocabulary.</p>
+                        </div>
+                        <div class="product-item">
+                            <h4>Simple Puzzle Boards</h4>
+                            <p>Chunky pieces with knobs to practice grasping and matching shapes.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Age 2-3 Years -->
+                <div class="age-details" id="age-2-details">
+                    <div class="age-header">
+                        <div class="age-icon age-2">
+                            <i class="fas fa-people-arrows"></i>
+                        </div>
+                        <div>
+                            <h3>2-3 Years: Imaginative Thinkers</h3>
+                            <p>Creative play, early problem-solving, and social skill development</p>
+                        </div>
+                    </div>
+                    <div class="age-products">
+                        <div class="product-item"><h4>Pretend Play Sets</h4><p>Role-playing toys that build imagination and social skills.</p></div>
+                        <div class="product-item"><h4>Sorting & Matching Games</h4><p>Color and shape recognition through playful challenges.</p></div>
+                        <div class="product-item"><h4>Simple Building Blocks</h4><p>Encourage creativity and fine motor development.</p></div>
+                        <div class="product-item"><h4>Musical Instruments</h4><p>Explore rhythm, cause and effect, and self-expression.</p></div>
+                    </div>
+                </div>
+                
+                <!-- Age 3-5 Years -->
+                <div class="age-details" id="age-3-details">
+                    <div class="age-header">
+                        <div class="age-icon age-3">
+                            <i class="fas fa-paint-brush"></i>
+                        </div>
+                        <div>
+                            <h3>3-5 Years: Creative Explorers</h3>
+                            <p>Pre-reading, math concepts, and collaborative play</p>
+                        </div>
+                    </div>
+                    <div class="age-products">
+                        <div class="product-item"><h4>Letter & Number Games</h4><p>Foundational literacy and numeracy through play.</p></div>
+                        <div class="product-item"><h4>Art & Craft Kits</h4><p>Self-expression and fine motor skill development.</p></div>
+                        <div class="product-item"><h4>Cooperative Board Games</h4><p>Turn-taking, patience, and teamwork.</p></div>
+                        <div class="product-item"><h4>Science Discovery Kits</h4><p>Simple experiments that spark curiosity.</p></div>
+                    </div>
+                </div>
+                
+                <!-- Age 5+ Years -->
+                <div class="age-details" id="age-4-details">
+                    <div class="age-header">
+                        <div class="age-icon age-4">
+                            <i class="fas fa-microscope"></i>
+                        </div>
+                        <div>
+                            <h3>5+ Years: Critical Thinkers</h3>
+                            <p>Advanced problem-solving, reading, and STEM concepts</p>
+                        </div>
+                    </div>
+                    <div class="age-products">
+                        <div class="product-item"><h4>Coding Robots</h4><p>Introductory programming logic without screens.</p></div>
+                        <div class="product-item"><h4>Math Puzzles</h4><p>Engaging ways to practice addition and subtraction.</p></div>
+                        <div class="product-item"><h4>Story Writing Kits</h4><p>Encourage literacy and creative writing skills.</p></div>
+                        <div class="product-item"><h4>Advanced Building Sets</h4><p>Complex engineering challenges for young minds.</p></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRODUCTS SECTION - Baby Categories -->
+    <section class="products-section" id="products">
+        <div class="container">
+            <div class="section-title">
+                <h2>Shop by <span>Category</span></h2>
+                <p>Everything your little explorer needs, carefully selected by our child development experts</p>
+            </div>
+            
+            <!-- Category Filter Tabs -->
+            <div class="category-tabs">
+                <button class="category-tab active" data-category="all" onclick="filterProducts('all')">
+                    <i class="fas fa-grid-2"></i> All Products
+                </button>
+                <button class="category-tab" data-category="toys" onclick="filterProducts('toys')">
+                    <i class="fas fa-cube"></i> Toys
+                </button>
+                <button class="category-tab" data-category="medicine" onclick="filterProducts('medicine')">
+                    <i class="fas fa-capsules"></i> Medicine
+                </button>
+                <button class="category-tab" data-category="books" onclick="filterProducts('books')">
+                    <i class="fas fa-book"></i> Books
+                </button>
+                <button class="category-tab" data-category="clothes" onclick="filterProducts('clothes')">
+                    <i class="fas fa-shirt"></i> Clothes
+                </button>
+                <button class="category-tab" data-category="shoes" onclick="filterProducts('shoes')">
+                    <i class="fas fa-shoe-prints"></i> Shoes
+                </button>
+                <button class="category-tab" data-category="oils" onclick="filterProducts('oils')">
+                    <i class="fas fa-droplet"></i> Body Oils
+                </button>
+            </div>
+            
+            <!-- Products Grid -->
+            <div class="products-grid" id="products-grid">
+                <!-- Products will be loaded here via JavaScript -->
+            </div>
+            
+            <!-- Product Quick View Modal -->
+            <div class="product-modal" id="productModal">
+                <div class="modal-content product-modal-content">
+                    <span class="close-modal" onclick="closeProductModal()">&times;</span>
+                    <div id="productModalContent"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== NEW LEARNING KIT BUILDER SECTION ===== -->
+    <section class="kit-builder" id="learning">
+        <div class="container">
+            <div class="kit-header-area">
+                <h2>Build Your <span>Learning Kit</span></h2>
+                <div class="kit-badge">
+                    <i class="fas fa-wand-magic"></i> Personalized Just For You
+                </div>
+            </div>
+            
+            <div class="builder-grid">
+                <!-- LEFT: DESIGN PANEL -->
+                <div class="design-panel">
+                    <h3><i class="fas fa-sliders-h" style="color: var(--secondary);"></i> Customize Your Kit</h3>
+                    
+                    <!-- Age Selection -->
+                    <div class="option-block">
+                        <h4><i class="fas fa-baby"></i> 1. Child's Age</h4>
+                        <div class="chip-group" id="kit-age-chips">
+                            <div class="chip selected" data-age="0-12m" data-label="0-12 Months"><i class="fas fa-baby-bottle"></i> 0-12 Months</div>
+                            <div class="chip" data-age="1-2y" data-label="1-2 Years"><i class="fas fa-baby"></i> 1-2 Years</div>
+                            <div class="chip" data-age="2-3y" data-label="2-3 Years"><i class="fas fa-walking"></i> 2-3 Years</div>
+                            <div class="chip" data-age="3-5y" data-label="3-5 Years"><i class="fas fa-paint-brush"></i> 3-5 Years</div>
+                            <div class="chip" data-age="5y+" data-label="5+ Years"><i class="fas fa-book-open"></i> 5+ Years</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Skill Focus -->
+                    <div class="option-block">
+                        <h4><i class="fas fa-brain"></i> 2. Skill Focus</h4>
+                        <div class="slider-container">
+                            <div class="skill-row">
+                                <span class="skill-label"><i class="fas fa-hand-pointer"></i> Fine Motor</span>
+                                <span id="fine-value">Medium</span>
+                            </div>
+                            <input type="range" min="1" max="5" value="3" class="slider" id="fine-slider">
+                            
+                            <div class="skill-row">
+                                <span class="skill-label"><i class="fas fa-person-walking"></i> Gross Motor</span>
+                                <span id="gross-value">Medium</span>
+                            </div>
+                            <input type="range" min="1" max="5" value="3" class="slider" id="gross-slider">
+                            
+                            <div class="skill-row">
+                                <span class="skill-label"><i class="fas fa-puzzle-piece"></i> Cognitive</span>
+                                <span id="cog-value">High</span>
+                            </div>
+                            <input type="range" min="1" max="5" value="4" class="slider" id="cog-slider">
+                            
+                            <div class="skill-row">
+                                <span class="skill-label"><i class="fas fa-comments"></i> Language</span>
+                                <span id="lang-value">Medium</span>
+                            </div>
+                            <input type="range" min="1" max="5" value="3" class="slider" id="lang-slider">
+                        </div>
+                    </div>
+                    
+                    <!-- Theme Interest -->
+                    <div class="option-block">
+                        <h4><i class="fas fa-cloud-sun"></i> 3. Theme Interest</h4>
+                        <div class="theme-grid" id="theme-grid">
+                            <div class="theme-card selected" data-theme="nature"><i class="fas fa-tree"></i> Nature</div>
+                            <div class="theme-card" data-theme="space"><i class="fas fa-rocket"></i> Space</div>
+                            <div class="theme-card" data-theme="music"><i class="fas fa-music"></i> Music</div>
+                            <div class="theme-card" data-theme="building"><i class="fas fa-cubes"></i> Building</div>
+                            <div class="theme-card" data-theme="art"><i class="fas fa-paint-roller"></i> Art</div>
+                            <div class="theme-card" data-theme="letters"><i class="fas fa-spell-check"></i> Literacy</div>
+                        </div>
+                    </div>
+                    
+                    <p style="color: #666; margin-top: 10px;"><i class="fas fa-sync-alt"></i> Your kit updates instantly as you customize</p>
+                </div>
+                
+                <!-- RIGHT: KIT PREVIEW PANEL -->
+                <div class="preview-panel">
+                    <div class="preview-stamp">
+                        <i class="fas fa-flask"></i> YOUR CUSTOM KIT
+                    </div>
+                    
+                    <div class="kit-title" id="kit-title-display">0-12 Months</div>
+                    <div class="kit-theme-badge" id="kit-theme-display">
+                        <i class="fas fa-tree"></i> Nature Theme · Balanced Skills
+                    </div>
+                    
+                    <div class="kit-items" id="kit-items-container">
+                        <!-- Dynamically filled by JavaScript -->
+                        <div class="empty-kit">
+                            <i class="fas fa-cube" style="font-size: 40px; color: #ddd;"></i>
+                            <p style="margin-top: 12px;">Customize your kit to see items</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; justify-content: space-between; align-items: baseline;">
+                        <span style="font-weight: 700;">Total</span>
+                        <span class="kit-price-tag" id="kit-price-tag">$49.99</span>
+                    </div>
+                    
+                    <button class="btn-build" id="add-kit-to-cart">
+                        <i class="fas fa-plus-circle"></i> Add to family hub
+                    </button>
+                    
+                    <div class="expert-note" id="expert-note">
+                        <i class="fas fa-lightbulb"></i> <strong>Expert tip:</strong> This kit strengthens fine motor and cognitive skills.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Family Hub -->
+    <section class="family-hub" id="family">
+        <div class="container family-container">
+            <div class="family-content">
+                <h2>The Family Learning Hub</h2>
+                <p>Create a centralized account to track each child's developmental journey and receive personalized educational recommendations.</p>
+                
+                <div class="family-features">
+                    <div class="family-feature">
+                        <i class="fas fa-graduation-cap"></i>
+                        <h4>Milestone Tracker</h4>
+                        <p>Log developmental achievements and get age-appropriate product suggestions.</p>
+                    </div>
+                    
+                    <div class="family-feature">
+                        <i class="fas fa-chart-line"></i>
+                        <h4>Progress Insights</h4>
+                        <p>Visualize each child's development across cognitive, motor, and social skills.</p>
+                    </div>
+                    
+                    <div class="family-feature">
+                        <i class="fas fa-lightbulb"></i>
+                        <h4>Learning Pathways</h4>
+                        <p>Personalized educational roadmaps based on each child's interests and pace.</p>
+                    </div>
+                    
+                    <div class="family-feature">
+                        <i class="fas fa-exchange-alt"></i>
+                        <h4>Sibling Sharing</h4>
+                        <p>Easily pass down appropriate toys and track what's suitable for each age.</p>
+                    </div>
+                </div>
+                
+                <a href="family-hub.html" class="cta-button">Start Your Family Hub <i class="fas fa-rocket"></i></a>
+            </div>
+            
+            <div class="family-image">
+                <img src="https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Family learning together with educational materials">
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-box">
+                <h2>Start Your Family's Learning Journey</h2>
+                <p>Join thousands of families who use LittleExplorers to find the perfect educational products for each child's unique developmental path.</p>
+                <a href="family-hub.html" class="cta-button-light">Create Your Free Family Hub <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== OUR EXPERTS SECTION ===== -->
+    <section class="experts-section" id="experts">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Trusted <span>Pediatric Experts</span></h2>
+                <p>Connect with Nairobi's most recommended child healthcare specialists and pediatricians</p>
+            </div>
+
+            <!-- Featured Hospitals with Website Links -->
+            <div class="hospitals-grid">
+                <div class="hospital-card">
+                    <div class="hospital-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h3>Gertrude's Children's Hospital</h3>
+                    <p>Kenya's most dedicated children's hospital with multiple branches including Muthaiga and Sarit Centre. Comprehensive pediatric care, emergencies, and specialists.</p>
+                    <div class="hospital-branches">
+                        <span><i class="fas fa-map-marker-alt"></i> Muthaiga</span>
+                        <span><i class="fas fa-map-marker-alt"></i> Sarit Centre</span>
+                    </div>
+                    <div class="hospital-links">
+                        <a href="https://www.gerties.org" target="_blank" class="btn-expert">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                        <a href="tel:+254709828000" class="btn-expert-call">
+                            <i class="fas fa-phone"></i> Call
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hospital-card">
+                    <div class="hospital-icon">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <h3>Aga Khan University Hospital</h3>
+                    <p>Strong Children's Ward and specialist clinics including developmental pediatrics. Home to Dr. Susan Wamithi for developmental issues.</p>
+                    <div class="hospital-links">
+                        <a href="https://www.agakhanhospitals.org/nairobi" target="_blank" class="btn-expert">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                        <a href="tel:+25420414000" class="btn-expert-call">
+                            <i class="fas fa-phone"></i> Call
+                        </a>
+                    </div>
+                </div>
+
+                <div class="hospital-card">
+                    <div class="hospital-icon">
+                        <i class="fas fa-child"></i>
+                    </div>
+                    <h3>MP Shah Hospital</h3>
+                    <p>Features a Children's Hospital with specialties in neonatology, pediatric surgery, cardiology, and neurology.</p>
+                    <div class="hospital-links">
+                        <a href="https://www.mpshahhospital.org" target="_blank" class="btn-expert">
+                            <i class="fas fa-globe"></i> Website
+                        </a>
+                        <a href="tel:+254204295000" class="btn-expert-call">
+                            <i class="fas fa-phone"></i> Call
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Featured Clinics & Pediatricians with Profiles -->
+            <div class="clinics-section">
+                <h3><i class="fas fa-star" style="color: var(--accent);"></i> Highly Recommended Pediatric Clinics</h3>
+                
+                <div class="clinics-grid">
+                    <!-- Honeybee Children's Clinic -->
+                    <div class="clinic-card featured">
+                        <div class="clinic-badge">⭐ Parent Favorite</div>
+                        <div class="clinic-header">
+                            <div class="clinic-icon">
+                                <i class="fas fa-bee"></i>
+                            </div>
+                            <div>
+                                <h4>The Honeybee Children's Clinic</h4>
+                                <p class="doctor-name">Led by Dr. Imran Khares</p>
+                            </div>
+                        </div>
+                        <p class="clinic-description">Praised for child-friendly environment, well-child checks, vaccinations, and care for asthma/allergies. Highlighted for personalized, humane care.</p>
+                        <div class="clinic-services">
+                            <span>✅ Well-child checks</span>
+                            <span>✅ Vaccinations</span>
+                            <span>✅ Asthma/Allergy care</span>
+                        </div>
+                        <div class="clinic-contact">
+                            <p><i class="fas fa-map-marker-alt"></i> Nairobi, Kenya</p>
+                            <p><i class="fas fa-phone"></i> +254 700 000 000</p>
+                        </div>
+                        <div class="clinic-links">
+                            <a href="#" class="btn-clinic" onclick="bookAppointment('Honeybee Children\'s Clinic')">
+                                <i class="fas fa-calendar-check"></i> Book Appointment
+                            </a>
+                            <a href="#" class="btn-profile" onclick="viewProfile('dr-imran-khares')">
+                                <i class="fas fa-user-md"></i> View Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Kilimani Children's Clinic -->
+                    <div class="clinic-card">
+                        <div class="clinic-header">
+                            <div class="clinic-icon">
+                                <i class="fas fa-clinic-medical"></i>
+                            </div>
+                            <div>
+                                <h4>Kilimani Children's Clinic</h4>
+                                <p class="doctor-name">Dr. Dorothy Mbugua & Dr. Moses Lango</p>
+                            </div>
+                        </div>
+                        <p>Specializing in neonatology and general pediatric services.</p>
+                        <div class="clinic-contact">
+                            <p><i class="fas fa-map-marker-alt"></i> Kilimani, Nairobi</p>
+                            <p><i class="fas fa-phone"></i> +254 722 000 000</p>
+                        </div>
+                        <div class="clinic-links">
+                            <a href="#" class="btn-clinic-small" onclick="bookAppointment('Kilimani Children\'s Clinic')">
+                                <i class="fas fa-calendar-check"></i> Book
+                            </a>
+                            <a href="#" class="btn-profile-small" onclick="viewProfile('dorothy-mbugua')">
+                                <i class="fas fa-user-md"></i> Dr. Mbugua
+                            </a>
+                            <a href="#" class="btn-profile-small" onclick="viewProfile('moses-lango')">
+                                <i class="fas fa-user-md"></i> Dr. Lango
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Dr. Kwamboka's Pediatric Clinic -->
+                    <div class="clinic-card">
+                        <div class="clinic-header">
+                            <div class="clinic-icon">
+                                <i class="fas fa-stethoscope"></i>
+                            </div>
+                            <div>
+                                <h4>Dr. Kwamboka's Pediatric Clinic</h4>
+                                <p class="doctor-name">Westlands</p>
+                            </div>
+                        </div>
+                        <p>Board-certified pediatrician with 10+ years experience. Focus on child development with welcoming setup for kids.</p>
+                        <div class="clinic-contact">
+                            <p><i class="fas fa-map-marker-alt"></i> Westlands, Nairobi</p>
+                            <p><i class="fas fa-phone"></i> +254 733 000 000</p>
+                        </div>
+                        <div class="clinic-links">
+                            <a href="#" class="btn-clinic-small" onclick="bookAppointment('Dr. Kwamboka\'s Clinic')">
+                                <i class="fas fa-calendar-check"></i> Book
+                            </a>
+                            <a href="#" class="btn-profile-small" onclick="viewProfile('dr-kwamboka')">
+                                <i class="fas fa-user-md"></i> View Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- The Paediatric Clinic -->
+                    <div class="clinic-card">
+                        <div class="clinic-header">
+                            <div class="clinic-icon">
+                                <i class="fas fa-clinic-medical"></i>
+                            </div>
+                            <div>
+                                <h4>The Paediatric Clinic</h4>
+                                <p class="doctor-name">Dr. Bashir Admani & Associates</p>
+                            </div>
+                        </div>
+                        <p>Clinics in Aga Khan area (Parklands) and Karen. Providing care for infants to adolescents since 2008.</p>
+                        <div class="clinic-locations">
+                            <span><i class="fas fa-map-pin"></i> Parklands</span>
+                            <span><i class="fas fa-map-pin"></i> Karen</span>
+                        </div>
+                        <div class="clinic-contact">
+                            <p><i class="fas fa-phone"></i> +254 711 000 000</p>
+                        </div>
+                        <div class="clinic-links">
+                            <a href="#" class="btn-clinic-small" onclick="bookAppointment('The Paediatric Clinic')">
+                                <i class="fas fa-calendar-check"></i> Book
+                            </a>
+                            <a href="#" class="btn-profile-small" onclick="viewProfile('bashir-admani')">
+                                <i class="fas fa-user-md"></i> Dr. Admani
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Individual Specialists with Profiles -->
+            <div class="specialists-section">
+                <h3><i class="fas fa-user-md" style="color: var(--primary);"></i> Top Recommended Pediatric Specialists</h3>
+                
+                <div class="specialists-grid">
+                    <div class="specialist-card">
+                        <div class="specialist-avatar">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h4>Dr. Yvonne M. Kariuki</h4>
+                        <p class="specialty">General Pediatrics & Neonatology</p>
+                        <p class="hospital">Nairobi Women's Hospital, Hurlingham</p>
+                        <div class="specialist-contact">
+                            <a href="#" class="btn-specialist" onclick="bookAppointment('Dr. Yvonne Kariuki')">
+                                <i class="fas fa-calendar-alt"></i> Book
+                            </a>
+                            <a href="#" class="btn-specialist-profile" onclick="viewProfile('yvonne-kariuki')">
+                                <i class="fas fa-id-card"></i> Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="specialist-card">
+                        <div class="specialist-avatar">
+                            <i class="fas fa-male"></i>
+                        </div>
+                        <h4>Dr. Henry M. Nderitu</h4>
+                        <p class="specialty">Pediatric Neurology</p>
+                        <p class="hospital">Kenyatta National Hospital</p>
+                        <div class="specialist-contact">
+                            <a href="#" class="btn-specialist" onclick="bookAppointment('Dr. Henry Nderitu')">
+                                <i class="fas fa-calendar-alt"></i> Book
+                            </a>
+                            <a href="#" class="btn-specialist-profile" onclick="viewProfile('henry-nderitu')">
+                                <i class="fas fa-id-card"></i> Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="specialist-card">
+                        <div class="specialist-avatar">
+                            <i class="fas fa-male"></i>
+                        </div>
+                        <h4>Dr. Njoroge Wambugu</h4>
+                        <p class="specialty">Consultant Pediatrician & Child Health Specialist</p>
+                        <p class="hospital">MP Shah Hospital, Parklands</p>
+                        <div class="specialist-contact">
+                            <a href="#" class="btn-specialist" onclick="bookAppointment('Dr. Njoroge Wambugu')">
+                                <i class="fas fa-calendar-alt"></i> Book
+                            </a>
+                            <a href="#" class="btn-specialist-profile" onclick="viewProfile('njoroge-wambugu')">
+                                <i class="fas fa-id-card"></i> Profile
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="specialist-card">
+                        <div class="specialist-avatar">
+                            <i class="fas fa-female"></i>
+                        </div>
+                        <h4>Dr. Susan Wamithi</h4>
+                        <p class="specialty">Developmental Pediatrics</p>
+                        <p class="hospital">Aga Khan University Hospital</p>
+                        <div class="specialist-contact">
+                            <a href="#" class="btn-specialist" onclick="bookAppointment('Dr. Susan Wamithi')">
+                                <i class="fas fa-calendar-alt"></i> Book
+                            </a>
+                            <a href="#" class="btn-specialist-profile" onclick="viewProfile('susan-wamithi')">
+                                <i class="fas fa-id-card"></i> Profile
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Booking Platforms with Live Links -->
+            <div class="booking-section">
+                <div class="booking-content">
+                    <h3><i class="fas fa-calendar-check"></i> Book Appointments Easily</h3>
+                    <p>Check availability, read patient reviews, and book appointments through trusted platforms.</p>
+                    <div class="platform-buttons">
+                        <a href="https://www.vezeeta.co.ke" target="_blank" class="platform-btn vezeeta">
+                            <i class="fas fa-stethoscope"></i> Vezeeta.co.ke
+                        </a>
+                        <a href="https://www.myhealthafrica.com" target="_blank" class="platform-btn">
+                            <i class="fas fa-calendar-alt"></i> MyHealth Africa
+                        </a>
+                        <a href="https://www.kenyadoc.com" target="_blank" class="platform-btn">
+                            <i class="fas fa-globe"></i> KenyaDoc
+                        </a>
+                    </div>
+                    
+                    <!-- Quick Insurance Check -->
+                    <div class="insurance-check">
+                        <p><i class="fas fa-shield-alt"></i> Accepted Insurance Providers:</p>
+                        <div class="insurance-badges">
+                            <span>NHIF</span>
+                            <span>AAR</span>
+                            <span>Jubilee</span>
+                            <span>Resolution</span>
+                            <span>CIC</span>
+                            <span>Madison</span>
+                        </div>
+                    </div>
+
+                    <p class="disclaimer">
+                        <i class="fas fa-info-circle"></i> 
+                        Specialists may have wait times. Always verify current availability and consult directly for the latest details. Consider your child's specific needs (general check-ups, neonatology, neurology, etc.)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-column">
+                    <h3>LittleExplorers</h3>
+                    <p>Empowering childhood development through play-based learning and age-appropriate educational resources.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Learning Stages</h3>
+                    <ul>
+                        <li><a href="index.html#explorer" onclick="setAgeAndScroll('0-12m')">Sensory (0-12M)</a></li>
+                        <li><a href="index.html#explorer" onclick="setAgeAndScroll('1-2y')">Toddler (1-3Y)</a></li>
+                        <li><a href="index.html#explorer" onclick="setAgeAndScroll('2-3y')">Preschool (3-5Y)</a></li>
+                        <li><a href="index.html#explorer" onclick="setAgeAndScroll('3-5y')">Early School (5-7Y)</a></li>
+                        <li><a href="index.html#explorer" onclick="setAgeAndScroll('5y+')">Elementary (7-10Y)</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Family Hub</h3>
+                    <ul>
+                        <li><a href="family-hub.html">Create Account</a></li>
+                        <li><a href="family-hub.html#children">Child Profiles</a></li>
+                        <li><a href="family-hub.html#milestones">Milestone Tracker</a></li>
+                        <li><a href="family-hub.html#pathways">Learning Reports</a></li>
+                        <li><a href="family-hub.html">Sibling Sharing</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="resources.html#development-guides">Development Guides</a></li>
+                        <li><a href="resources.html#expert-advice">Expert Advice</a></li>
+                        <li><a href="resources.html#learning-activities">Learning Activities</a></li>
+                        <li><a href="resources.html#product-safety">Product Safety</a></li>
+                        <li><a href="mailto:educators@littleexplorers.com?subject=Question%20for%20Educators">Contact Our Educators</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2023 LittleExplorers. All rights reserved. | Learning through play at every developmental stage.</p>
+            </div>
+        </div>
+    </footer><script>
+        // ===== ORIGINAL AGE SLIDER FUNCTIONALITY (PRESERVED) =====
+        const ageMarkers = document.querySelectorAll('.age-marker');
+        const ageDetails = document.querySelectorAll('.age-details');
+        
+        ageMarkers.forEach(marker => {
+            marker.addEventListener('click', () => {
+                const age = marker.getAttribute('data-age');
+                
+                ageMarkers.forEach(m => m.classList.remove('active'));
+                ageDetails.forEach(d => d.classList.remove('active'));
+                
+                marker.classList.add('active');
+                document.getElementById(`age-${age}-details`).classList.add('active');
+            });
+        });
+        
+        // Simple cart counter functionality
+        const cartCount = document.querySelector('.cart-count');
+        let count = 0;
+        
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if(targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if(targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Add animation to CTA button
+        const ctaButton = document.querySelector('.cta-button');
+        setInterval(() => {
+            ctaButton.style.transform = 'translateY(-5px)';
+            setTimeout(() => {
+                ctaButton.style.transform = 'translateY(0)';
+            }, 300);
+        }, 3000);
+        
+        // ===== NEW LEARNING KIT BUILDER FUNCTIONALITY =====
+        // Product database
+        const kitProductPools = {
+            '0-12m': [
+                { name: 'High-Contrast Mobiles', price: 18.99, icon: 'fa-mobile-screen', skills: ['cognitive'], themes: ['nature','space','music','building','art','letters'] },
+                { name: 'Textured Sensory Balls', price: 16.50, icon: 'fa-basketball', skills: ['fine', 'gross'], themes: ['nature','art','music'] },
+                { name: 'Soft Activity Gym', price: 34.99, icon: 'fa-cube', skills: ['gross','cognitive'], themes: ['nature','building','art'] },
+                { name: 'Crinkle Sound Book', price: 12.99, icon: 'fa-book', skills: ['language','cognitive'], themes: ['letters','nature','music'] },
+                { name: 'Wrist Rattles', price: 9.99, icon: 'fa-bell', skills: ['fine'], themes: ['music','art'] },
+                { name: 'Black & White Cards', price: 11.49, icon: 'fa-clover', skills: ['cognitive'], themes: ['nature','letters'] }
+            ],
+            '1-2y': [
+                { name: 'Push & Pull Walker', price: 32.99, icon: 'fa-person-walking', skills: ['gross'], themes: ['building','nature'] },
+                { name: 'Stacking Cups', price: 14.99, icon: 'fa-cubes', skills: ['fine','cognitive'], themes: ['building','nature'] },
+                { name: 'First Puzzle - Shapes', price: 13.99, icon: 'fa-puzzle-piece', skills: ['cognitive','fine'], themes: ['building','letters'] },
+                { name: 'Animal Sound Book', price: 15.99, icon: 'fa-dog', skills: ['language','cognitive'], themes: ['nature','letters','music'] },
+                { name: 'Shape Sorter', price: 19.49, icon: 'fa-shapes', skills: ['cognitive','fine'], themes: ['building','nature'] },
+                { name: 'Bath Floaties', price: 12.99, icon: 'fa-water', skills: ['gross'], themes: ['nature','music'] }
+            ],
+            '2-3y': [
+                { name: 'Magnetic Building Tiles', price: 39.99, icon: 'fa-cubes', skills: ['cognitive','fine'], themes: ['building','space'] },
+                { name: 'Play-Doh Set', price: 17.99, icon: 'fa-paint-brush', skills: ['fine'], themes: ['art','nature'] },
+                { name: 'Toddler Balance Bike', price: 49.99, icon: 'fa-bicycle', skills: ['gross'], themes: ['nature','building'] },
+                { name: 'Color Matching Game', price: 14.50, icon: 'fa-palette', skills: ['cognitive'], themes: ['art','letters'] },
+                { name: 'Musical Instrument Set', price: 27.99, icon: 'fa-drum', skills: ['fine','language'], themes: ['music'] },
+                { name: 'Simple 4-6pc Puzzles', price: 13.99, icon: 'fa-puzzle-piece', skills: ['cognitive'], themes: ['nature','letters'] }
+            ],
+            '3-5y': [
+                { name: 'Letter Matching Game', price: 21.99, icon: 'fa-spell-check', skills: ['language','cognitive'], themes: ['letters'] },
+                { name: 'Science Kit - Sink/Float', price: 28.99, icon: 'fa-flask', skills: ['cognitive'], themes: ['nature','space'] },
+                { name: 'Kids Tool Set', price: 34.50, icon: 'fa-hammer', skills: ['fine','gross'], themes: ['building'] },
+                { name: 'Pattern Blocks', price: 19.99, icon: 'fa-shapes', skills: ['cognitive','fine'], themes: ['building','art'] },
+                { name: 'Rhyming Cards', price: 16.99, icon: 'fa-book-open', skills: ['language'], themes: ['letters','music'] },
+                { name: 'Scissors & Craft', price: 14.99, icon: 'fa-scissors', skills: ['fine'], themes: ['art'] }
+            ],
+            '5y+': [
+                { name: 'Math Bingo', price: 22.99, icon: 'fa-calculator', skills: ['cognitive'], themes: ['letters','building'] },
+                { name: 'Solar System Puzzle', price: 24.99, icon: 'fa-globe', skills: ['cognitive'], themes: ['space'] },
+                { name: 'Early Coding Game', price: 44.99, icon: 'fa-laptop', skills: ['cognitive','fine'], themes: ['building','space'] },
+                { name: 'Storytelling Dice', price: 16.99, icon: 'fa-dice', skills: ['language'], themes: ['letters','art'] },
+                { name: 'Jump Rope', price: 12.99, icon: 'fa-heart', skills: ['gross'], themes: ['nature','music'] },
+                { name: 'Sprouting Garden Kit', price: 26.99, icon: 'fa-seedling', skills: ['cognitive'], themes: ['nature'] }
+            ]
+        };
+        
+        // Kit builder state
+        let kitAge = '0-12m';
+        let kitAgeLabel = '0-12 Months';
+        let kitTheme = 'nature';
+        let fineVal = 3, grossVal = 3, cogVal = 4, langVal = 3;
+        
+        // DOM elements
+        const kitAgeChips = document.querySelectorAll('#kit-age-chips .chip');
+        const themeCards = document.querySelectorAll('.theme-card');
+        const fineSlider = document.getElementById('fine-slider');
+        const grossSlider = document.getElementById('gross-slider');
+        const cogSlider = document.getElementById('cog-slider');
+        const langSlider = document.getElementById('lang-slider');
+        const fineValue = document.getElementById('fine-value');
+        const grossValue = document.getElementById('gross-value');
+        const cogValue = document.getElementById('cog-value');
+        const langValue = document.getElementById('lang-value');
+        const kitTitleDisplay = document.getElementById('kit-title-display');
+        const kitThemeDisplay = document.getElementById('kit-theme-display');
+        const kitItemsContainer = document.getElementById('kit-items-container');
+        const kitPriceTag = document.getElementById('kit-price-tag');
+        const expertNote = document.getElementById('expert-note');
+        
+        // Helper: get skill level text
+        function getSkillLevel(val) {
+            if (val <= 2) return 'Low';
+            if (val === 3) return 'Medium';
+            return 'High';
+        }
+        
+        // Helper: get theme icon and name
+        function getThemeInfo(theme) {
+            const map = {
+                'nature': { icon: 'fa-tree', name: 'Nature' },
+                'space': { icon: 'fa-rocket', name: 'Space' },
+                'music': { icon: 'fa-music', name: 'Music' },
+                'building': { icon: 'fa-cubes', name: 'Building' },
+                'art': { icon: 'fa-paint-roller', name: 'Art' },
+                'letters': { icon: 'fa-spell-check', name: 'Literacy' }
+            };
+            return map[theme] || { icon: 'fa-tree', name: 'Nature' };
+        }
+        
+        // Generate kit items based on current selections
+        function generateKitItems() {
+            const pool = kitProductPools[kitAge] || kitProductPools['0-12m'];
+            
+            // Filter by theme preference
+            let candidates = pool.filter(item => item.themes.includes(kitTheme));
+            if (candidates.length < 3) candidates = pool;
+            
+            // Score items based on skill sliders
+            const scored = candidates.map(item => {
+                let score = 0;
+                if (item.skills.includes('fine')) score += fineVal * 2;
+                if (item.skills.includes('gross')) score += grossVal * 2;
+                if (item.skills.includes('cognitive')) score += cogVal * 2;
+                if (item.skills.includes('language')) score += langVal * 2;
+                if (item.themes.includes(kitTheme)) score += 5;
+                return { ...item, score };
+            });
+            
+            scored.sort((a, b) => b.score - a.score);
+            
+            // Take top 4 unique items
+            let selected = [];
+            let names = new Set();
+            for (let item of scored) {
+                if (!names.has(item.name)) {
+                    selected.push(item);
+                    names.add(item.name);
+                }
+                if (selected.length >= 4) break;
+            }
+            
+            // Fill if needed
+            if (selected.length < 4) {
+                for (let item of pool) {
+                    if (!names.has(item.name)) {
+                        selected.push(item);
+                        names.add(item.name);
+                        if (selected.length >= 4) break;
+                    }
+                }
+            }
+            
+            return selected;
+        }
+        
+        // Render the kit preview
+        function renderKitPreview() {
+            // Update title and theme
+            kitTitleDisplay.textContent = kitAgeLabel;
+            const themeInfo = getThemeInfo(kitTheme);
+            kitThemeDisplay.innerHTML = `<i class="fas ${themeInfo.icon}"></i> ${themeInfo.name} Theme · Balanced Skills`;
+            
+            // Generate items
+            const items = generateKitItems();
+            let total = 0;
+            let itemsHtml = '';
+            
+            items.forEach(item => {
+                total += item.price;
+                itemsHtml += `
+                    <div class="kit-item">
+                        <i class="fas ${item.icon}"></i>
+                        <span>${item.name}</span>
+                        <span style="font-weight: 700;">$${item.price.toFixed(2)}</span>
+                    </div>
+                `;
+            });
+            
+            if (items.length === 0) {
+                itemsHtml = '<div class="empty-kit"><i class="fas fa-box-open" style="font-size: 40px;"></i><p>No items match your criteria</p></div>';
+            }
+            
+            kitItemsContainer.innerHTML = itemsHtml;
+            kitPriceTag.textContent = `$${total.toFixed(2)}`;
+            
+            // Update expert note
+            let focusSkills = [];
+            if (fineVal >= 4) focusSkills.push('fine motor');
+            if (grossVal >= 4) focusSkills.push('gross motor');
+            if (cogVal >= 4) focusSkills.push('cognitive');
+            if (langVal >= 4) focusSkills.push('language');
+            if (focusSkills.length === 0) focusSkills = ['balanced'];
+            
+            expertNote.innerHTML = `<i class="fas fa-lightbulb"></i> <strong>Expert tip:</strong> This kit strengthens ${focusSkills.join(', ')} skills.`;
+        }
+        
+        // Update slider display values
+        function updateSliderValues() {
+            fineValue.textContent = getSkillLevel(fineVal);
+            grossValue.textContent = getSkillLevel(grossVal);
+            cogValue.textContent = getSkillLevel(cogVal);
+            langValue.textContent = getSkillLevel(langVal);
+        }
+        
+        // Age chip click
+        kitAgeChips.forEach(chip => {
+            chip.addEventListener('click', function() {
+                kitAgeChips.forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                kitAge = this.dataset.age;
+                kitAgeLabel = this.dataset.label;
+                renderKitPreview();
+            });
+        });
+        
+        // Theme card click
+        themeCards.forEach(card => {
+            card.addEventListener('click', function() {
+                themeCards.forEach(c => c.classList.remove('selected'));
+                this.classList.add('selected');
+                kitTheme = this.dataset.theme;
+                renderKitPreview();
+            });
+        });
+        
+        // Slider events
+        fineSlider.addEventListener('input', function() {
+            fineVal = parseInt(this.value);
+            fineValue.textContent = getSkillLevel(fineVal);
+            renderKitPreview();
+        });
+        
+        grossSlider.addEventListener('input', function() {
+            grossVal = parseInt(this.value);
+            grossValue.textContent = getSkillLevel(grossVal);
+            renderKitPreview();
+        });
+        
+        cogSlider.addEventListener('input', function() {
+            cogVal = parseInt(this.value);
+            cogValue.textContent = getSkillLevel(cogVal);
+            renderKitPreview();
+        });
+        
+        langSlider.addEventListener('input', function() {
+            langVal = parseInt(this.value);
+            langValue.textContent = getSkillLevel(langVal);
+            renderKitPreview();
+        });
+        
+        // Initialize kit builder
+        updateSliderValues();
+        renderKitPreview();
+        
+        // Add kit to cart button
+        document.getElementById('add-kit-to-cart').addEventListener('click', function() {
+            const price = kitPriceTag.textContent;
+            
+            // Update main cart count
+            let cartCount = document.querySelector('.cart-count');
+            let currentCount = parseInt(cartCount.textContent) || 0;
+            cartCount.textContent = currentCount + 4; // Adding 4 items
+            
+            alert(`✨ Custom kit added to your cart! Total: ${price}. Continue building or checkout.`);
+        });
+
+        // ===== PRODUCTS DATABASE =====
+        const products = [
+            // TOYS
+            {
+                id: 1,
+                name: "Montessori Wooden Blocks",
+                category: "toys",
+                categoryDisplay: "Toys",
+                price: 34.99,
+                originalPrice: 39.99,
+                description: "Natural wood building blocks that encourage creativity, fine motor skills, and spatial reasoning. Non-toxic, eco-friendly.",
+                fullDescription: "Set of 50 wooden blocks in various shapes and sizes. Made from sustainable rubberwood, painted with water-based non-toxic dyes. Helps develop hand-eye coordination, problem-solving, and creativity. Includes storage bag. Suitable for ages 12m+.",
+                icon: "fa-cubes",
+                age: "12m+",
+                badge: "Bestseller",
+                inStock: true
+            },
+            {
+                id: 2,
+                name: "Sensory Play Mat",
+                category: "toys",
+                categoryDisplay: "Toys",
+                price: 49.99,
+                originalPrice: null,
+                description: "Interactive play mat with different textures, sounds, and mirrors for tummy time and sensory exploration.",
+                fullDescription: "Large 40x40 inch activity mat featuring 8 sensory zones including crinkle paper, squeaker, mirror, and various fabric textures. Machine washable cover. Encourages reaching, grasping, and sensory development. Suitable from birth.",
+                icon: "fa-border-all",
+                age: "0m+",
+                badge: "New",
+                inStock: true
+            },
+            {
+                id: 3,
+                name: "Shape Sorting Cube",
+                category: "toys",
+                categoryDisplay: "Toys",
+                price: 24.99,
+                originalPrice: 29.99,
+                description: "Classic shape sorter with 12 colorful blocks. Teaches shapes, colors, and problem-solving.",
+                fullDescription: "Wooden cube with elastic bands and 12 chunky shape blocks. Easy-grip pieces perfect for small hands. Develops fine motor skills, shape recognition, and logical thinking. Includes storage inside cube. Ages 18m+.",
+                icon: "fa-shapes",
+                age: "18m+",
+                badge: "Sale",
+                inStock: true
+            },
+            
+            // MEDICINE
+            {
+                id: 4,
+                name: "Infant Tylenol",
+                category: "medicine",
+                categoryDisplay: "Medicine",
+                price: 12.99,
+                originalPrice: null,
+                description: "Fever reducer and pain reliever for infants 2+ years. Dye-free, grape flavor.",
+                fullDescription: "Acetaminophen oral suspension. 160mg per 5mL. Alcohol-free, ibuprofen-free, aspirin-free. Includes oral syringe for accurate dosing. Always consult pediatrician before use.",
+                icon: "fa-syringe",
+                age: "2y+",
+                badge: "Doctor Recommended",
+                inStock: true
+            },
+            {
+                id: 5,
+                name: "Baby Gas Relief Drops",
+                category: "medicine",
+                categoryDisplay: "Medicine",
+                price: 8.99,
+                originalPrice: null,
+                description: "Simethicone gas relief drops for infants. Fast-acting, gentle formula.",
+                fullDescription: "Relieves baby's gas, pressure, and discomfort. Non-staining, non-constipating. Free from artificial flavors and dyes. Suitable for newborns. 30mL bottle with dropper.",
+                icon: "fa-droplet",
+                age: "0m+",
+                badge: "Pediatrician Approved",
+                inStock: true
+            },
+            {
+                id: 6,
+                name: "Nasal Aspirator Kit",
+                category: "medicine",
+                categoryDisplay: "Medicine",
+                price: 19.99,
+                originalPrice: 24.99,
+                description: "Electric nasal aspirator with soft silicone tips. 3 adjustable suction levels.",
+                fullDescription: "BPA-free silicone tips, easy to clean. Includes 6 replacement filters. Music mode to soothe baby. USB rechargeable. Helps clear stuffy nose safely and effectively.",
+                icon: "fa-wind",
+                age: "0m+",
+                badge: "Best for Cold Season",
+                inStock: true
+            },
+            
+            // BOOKS
+            {
+                id: 7,
+                name: "Goodnight Moon Board Book",
+                category: "books",
+                categoryDisplay: "Books",
+                price: 9.99,
+                originalPrice: null,
+                description: "Classic bedtime story with simple rhymes and calming illustrations.",
+                fullDescription: "Durable board book perfect for little hands. Features the original 1947 illustrations. Helps establish bedtime routines and language development. 30 pages.",
+                icon: "fa-moon",
+                age: "0-3y",
+                badge: "Classic",
+                inStock: true
+            },
+            {
+                id: 8,
+                name: "First 100 Words",
+                category: "books",
+                categoryDisplay: "Books",
+                price: 12.99,
+                originalPrice: null,
+                description: "Bilingual picture book with real photographs. English and Spanish.",
+                fullDescription: "Large format board book with 100 everyday objects. Real photos, not illustrations. Helps build vocabulary in two languages. Durable, wipe-clean pages.",
+                icon: "fa-book-open",
+                age: "1-4y",
+                badge: "Bilingual",
+                inStock: true
+            },
+            {
+                id: 9,
+                name: "Touch and Feel Farm Animals",
+                category: "books",
+                categoryDisplay: "Books",
+                price: 11.99,
+                originalPrice: 14.99,
+                description: "Interactive sensory book with 5 different textures to explore.",
+                fullDescription: "Each page features a different farm animal with textured patches. Simple sentences introduce animal sounds and names. Encourages sensory exploration and early reading. Ages 0-3.",
+                icon: "fa-hand-pointer",
+                age: "0-3y",
+                badge: "Sensory",
+                inStock: true
+            },
+            
+            // CLOTHES
+            {
+                id: 10,
+                name: "Organic Cotton Romper",
+                category: "clothes",
+                categoryDisplay: "Clothes",
+                price: 24.99,
+                originalPrice: 29.99,
+                description: "100% GOTS certified organic cotton romper. Snap buttons for easy changing.",
+                fullDescription: "Soft, breathable fabric perfect for sensitive skin. Available in sizes 0-24m. Lap shoulders and bottom snaps for quick diaper changes. Machine washable.",
+                icon: "fa-child",
+                age: "0-24m",
+                badge: "Eco-Friendly",
+                inStock: true
+            },
+            {
+                id: 11,
+                name: "Pajama Set - 2-Pack",
+                category: "clothes",
+                categoryDisplay: "Clothes",
+                price: 32.99,
+                originalPrice: null,
+                description: "Cozy footed pajamas with non-slip grips. Flame-retardant free.",
+                fullDescription: "Two-piece set includes long sleeve top and pants with feet. Elastic waistband, reinforced knees. Zipper front with safety flap. Cute animal prints. Sizes 6m-5T.",
+                icon: "fa-moon",
+                age: "6m-5T",
+                badge: "Cozy",
+                inStock: true
+            },
+            {
+                id: 12,
+                name: "Baby Beanie & Mittens Set",
+                category: "clothes",
+                categoryDisplay: "Clothes",
+                price: 16.99,
+                originalPrice: null,
+                description: "Soft knit hat and scratch mittens set. Stretchy, comfortable cotton blend.",
+                fullDescription: "Gentle on newborn skin. Hat has fold-up cuff, mittens have elastic wrists. Available in neutral colors. One size fits most 0-12 months.",
+                icon: "fa-hat-wizard",
+                age: "0-12m",
+                badge: "Gift Set",
+                inStock: true
+            },
+            
+            // SHOES
+            {
+                id: 13,
+                name: "Soft Sole Crib Shoes",
+                category: "shoes",
+                categoryDisplay: "Shoes",
+                price: 22.99,
+                originalPrice: null,
+                description: "Flexible leather shoes for pre-walkers. Elastic ankle for secure fit.",
+                fullDescription: "Genuine leather upper, suede sole. Allows natural foot movement and development. Double elastic gore for easy on/off. Sizes 0-12m.",
+                icon: "fa-shoe-prints",
+                age: "0-12m",
+                badge: "Pre-Walker",
+                inStock: true
+            },
+            {
+                id: 14,
+                name: "First Walker Sneakers",
+                category: "shoes",
+                categoryDisplay: "Shoes",
+                price: 34.99,
+                originalPrice: 39.99,
+                description: "Lightweight, flexible sneakers with non-slip rubber sole.",
+                fullDescription: "Breathable mesh upper, padded collar. Hook-and-loop closure for easy adjusting. Wide toe box for natural toe spread. Machine washable. Sizes 12-24m.",
+                icon: "fa-running",
+                age: "12-24m",
+                badge: "Bestseller",
+                inStock: true
+            },
+            {
+                id: 15,
+                name: "Rain Boots",
+                category: "shoes",
+                categoryDisplay: "Shoes",
+                price: 27.99,
+                originalPrice: null,
+                description: "Colorful rubber rain boots with pull handles. Easy to clean.",
+                fullDescription: "100% waterproof. Cotton lining for comfort. Deep treads for traction. Fun animal face designs. Sizes 18m-5T.",
+                icon: "fa-cloud-rain",
+                age: "18m-5T",
+                badge: "Weather Ready",
+                inStock: true
+            },
+            
+            // BODY OILS
+            {
+                id: 16,
+                name: "Organic Baby Massage Oil",
+                category: "oils",
+                categoryDisplay: "Body Oils",
+                price: 18.99,
+                originalPrice: null,
+                description: "100% organic jojoba and chamomile oil. Hypoallergenic, fragrance-free.",
+                fullDescription: "Certified organic, cold-pressed oils. Rich in vitamin E. Soothes dry skin, gentle for daily massage. Free from parabens, phthalates, and synthetic fragrances. 200mL pump bottle.",
+                icon: "fa-spa",
+                age: "All ages",
+                badge: "Organic",
+                inStock: true
+            },
+            {
+                id: 17,
+                name: "Diaper Rash Cream",
+                category: "oils",
+                categoryDisplay: "Body Oils",
+                price: 14.99,
+                originalPrice: null,
+                description: "Zinc oxide cream with shea butter and calendula. Creates protective barrier.",
+                fullDescription: "40% zinc oxide for effective relief. Natural calendula and chamomile soothe irritation. Paraben-free, phthalate-free. Pediatrician tested. 100g tube.",
+                icon: "fa-heart",
+                age: "0m+",
+                badge: "Pediatrician Choice",
+                inStock: true
+            },
+            {
+                id: 18,
+                name: "Baby Lotion - Sensitive Skin",
+                category: "oils",
+                categoryDisplay: "Body Oils",
+                price: 12.99,
+                originalPrice: 15.99,
+                description: "Daily moisturizer for eczema-prone skin. Colloidal oatmeal formula.",
+                fullDescription: "National Eczema Association accepted. Fragrance-free, hypoallergenic. Ceramides and colloidal oatmeal restore moisture barrier. Non-greasy, fast absorbing. 355mL pump.",
+                icon: "fa-leaf",
+                age: "0m+",
+                badge: "Eczema Safe",
+                inStock: true
+            }
+        ];
+
+        // Cart array
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        const KSH_CONVERSION = 130; // 1 USD = 130 KSH
+
+        // Convert USD to KSH
+        function toKSH(usd) {
+            return Math.round(usd * KSH_CONVERSION);
+        }
+
+        // DOM Elements
+        const productsGrid = document.getElementById('products-grid');
+        const cartNotification = document.createElement('div');
+        cartNotification.className = 'cart-notification';
+        document.body.appendChild(cartNotification);
+
+        // Initialize products
+        function loadProducts(category = 'all') {
+            if (!productsGrid) return;
+            
+            let filteredProducts = category === 'all' 
+                ? products 
+                : products.filter(p => p.category === category);
+            
+            productsGrid.innerHTML = '';
+            
+            filteredProducts.forEach(product => {
+                const productCard = createProductCard(product);
+                productsGrid.innerHTML += productCard;
+            });
+        }
+
+        // Create product card HTML
+        function createProductCard(product) {
+            const discount = product.originalPrice 
+                ? `<span>$${product.originalPrice}</span>` 
+                : '';
+            
+            const badge = product.badge 
+                ? `<div class="product-badge">${product.badge}</div>` 
+                : '';
+            
+            const kshPrice = toKSH(product.price).toLocaleString();
+            
+            return `
+                <div class="product-card" data-product-id="${product.id}">
+                    ${badge}
+                    <button class="btn-inquiry" onclick="inquiryProduct(${product.id})" title="Ask about this product">
+                        <i class="fas fa-question"></i>
+                    </button>
+                    <div class="product-image">
+                        <i class="fas ${product.icon}"></i>
+                    </div>
+                    <div class="product-category">
+                        <i class="fas ${getCategoryIcon(product.category)}"></i> ${product.categoryDisplay}
+                        <span style="margin-left: auto; font-size: 12px; color: var(--blue);">${product.age}</span>
+                    </div>
+                    <h3 class="product-title">${product.name}</h3>
+                    <p class="product-description">${product.description}</p>
+                    <div class="product-price-row">
+                        <div class="product-price">
+                            <span class="price" data-product-id="${product.id}" data-price="${product.price}">
+                                KSh ${kshPrice}
+                            </span>
+                        </div>
+                    </div>
+                    <div class="product-actions">
+                        <button class="btn-add-to-cart" onclick="addToCart(${product.id})">
+                            <i class="fas fa-shopping-cart"></i> Add to Cart
+                        </button>
+                        <button class="btn-more-info" onclick="showProductInfo(${product.id})">
+                            <i class="fas fa-info-circle"></i> Info
+                        </button>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Get category icon
+        function getCategoryIcon(category) {
+            const icons = {
+                toys: 'fa-cube',
+                medicine: 'fa-capsules',
+                books: 'fa-book',
+                clothes: 'fa-shirt',
+                shoes: 'fa-shoe-prints',
+                oils: 'fa-droplet'
+            };
+            return icons[category] || 'fa-tag';
+        }
+
+        // Filter products by category
+        function filterProducts(category) {
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Load products
+            loadProducts(category);
+        }
+
+        // Add to cart
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const existingItem = cart.find(item => item.id === productId);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    id: product.id,
+                    name: product.name,
+                    price: product.price,
+                    icon: product.icon,
+                    quantity: 1
+                });
+            }
+            
+            // Save to localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+            
+            // Update cart count in header
+            updateCartCount();
+            
+            // Show notification
+            showCartNotification(`${product.name} added to cart!`);
+        }
+
+        // Update cart count in header
+        function updateCartCount() {
+            const cartCount = document.querySelector('.cart-count');
+            if (cartCount) {
+                const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+                cartCount.textContent = totalItems;
+            }
+        }
+
+        // Show cart notification
+        function showCartNotification(message) {
+            cartNotification.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`;
+            cartNotification.classList.add('show');
+            
+            setTimeout(() => {
+                cartNotification.classList.remove('show');
+            }, 3000);
+        }
+
+        // Product inquiry
+        function inquiryProduct(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const subject = encodeURIComponent(`Inquiry about: ${product.name}`);
+                const body = encodeURIComponent(`Hello,\n\nI'm interested in learning more about the ${product.name}.\n\nQuestions:\n- Is this in stock?\n- What ages is it suitable for?\n- Any safety certifications?\n\nThank you!`);
+                window.location.href = `mailto:hello@littleexplorers.com?subject=${subject}&body=${body}`;
+            }
+        }
+
+        // Show product detailed information
+        function showProductInfo(productId) {
+            const product = products.find(p => p.id === productId);
+            if (!product) return;
+            
+            const modal = document.getElementById('productModal');
+            const modalContent = document.getElementById('productModalContent');
+            
+            modalContent.innerHTML = `
+                <div style="display: flex; gap: 30px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px; text-align: center;">
+                        <div style="background: var(--hover-bg); padding: 40px; border-radius: 20px;">
+                            <i class="fas ${product.icon}" style="font-size: 100px; color: var(--primary);"></i>
+                        </div>
+                    </div>
+                    <div style="flex: 2;">
+                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                            <span style="background: var(--primary); color: white; padding: 6px 18px; border-radius: 30px; font-size: 14px; font-weight: 600;">
+                                ${product.categoryDisplay}
+                            </span>
+                            <span style="background: var(--accent); color: var(--dark); padding: 6px 18px; border-radius: 30px; font-size: 14px; font-weight: 600;">
+                                ${product.age}
+                            </span>
+                            ${product.badge ? `<span style="background: var(--secondary); color: white; padding: 6px 18px; border-radius: 30px; font-size: 14px; font-weight: 600;">
+                                ${product.badge}
+                            </span>` : ''}
+                        </div>
+                        
+                        <h2 style="font-size: 32px; margin-bottom: 15px; color: var(--text);">${product.name}</h2>
+                        
+                        <div style="margin-bottom: 25px;">
+                            <span style="font-size: 36px; font-weight: 800; color: var(--secondary);">KSh ${toKSH(product.price).toLocaleString()}</span>
+                            ${product.originalPrice ? `<span style="font-size: 20px; color: var(--text); opacity: 0.5; text-decoration: line-through; margin-left: 15px;">KSh ${toKSH(product.originalPrice).toLocaleString()}</span>` : ''}
+                        </div>
+                        
+                        <div style="background: var(--hover-bg); padding: 25px; border-radius: 20px; margin-bottom: 25px;">
+                            <h4 style="font-size: 18px; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: var(--text);">
+                                <i class="fas fa-info-circle" style="color: var(--primary);"></i> Product Details
+                            </h4>
+                            <p style="font-size: 16px; line-height: 1.8; color: var(--text); opacity: 0.8;">${product.fullDescription}</p>
+                        </div>
+                        
+                        <div style="display: flex; gap: 15px;">
+                            <button onclick="addToCart(${product.id})" style="flex: 2; background: linear-gradient(135deg, var(--primary), var(--blue)); color: white; border: none; padding: 16px 30px; border-radius: 50px; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer;">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart
+                            </button>
+                            <button onclick="inquiryProduct(${product.id})" style="flex: 1; background: var(--card-bg); border: 2px solid var(--primary); color: var(--primary); padding: 16px 20px; border-radius: 50px; font-weight: 700; font-size: 16px; display: flex; align-items: center; justify-content: center; gap: 10px; cursor: pointer;">
+                                <i class="fas fa-question-circle"></i> Ask
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            modal.classList.add('active');
+        }
+
+        // Close product modal
+        function closeProductModal() {
+            document.getElementById('productModal').classList.remove('active');
+        }
+
+        // Initialize products on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            loadProducts('all');
+            updateCartCount();
+        });
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('productModal');
+            if (event.target === modal) {
+                modal.classList.remove('active');
+            }
+        }
+
+        // ===== FOOTER LINK FUNCTIONS =====
+        function setAgeAndScroll(ageGroup) {
+            // Store selected age in localStorage
+            localStorage.setItem('selectedAgeGroup', ageGroup);
+            
+            // Map age groups to their display names
+            const ageMap = {
+                '0-12m': '0-12 Months',
+                '1-2y': '1-2 Years',
+                '2-3y': '2-3 Years',
+                '3-5y': '3-5 Years',
+                '5y+': '5+ Years'
+            };
+            
+            // Store the label too
+            localStorage.setItem('selectedAgeLabel', ageMap[ageGroup]);
+            
+            // Small delay to ensure localStorage is set
+            setTimeout(() => {
+                // Scroll to Age Explorer section
+                const explorerSection = document.getElementById('explorer');
+                if (explorerSection) {
+                    explorerSection.scrollIntoView({ behavior: 'smooth' });
+                    
+                    // Find and click the corresponding age marker
+                    const ageMarkers = document.querySelectorAll('.age-marker');
+                    ageMarkers.forEach(marker => {
+                        if (marker.getAttribute('data-age') === ageGroup) {
+                            marker.click();
+                        }
+                    });
+                }
+            }, 100);
+        }
+
+        // ===== EXPERTS SECTION FUNCTIONS =====
+        function bookAppointment(doctorName) {
+            // Check if user is logged in (simulated with localStorage)
+            const currentUser = localStorage.getItem('littleExplorers_currentUser');
+            
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                alert(`✅ Booking appointment with ${doctorName}\n\nWe'll send a confirmation to ${user.phone || user.email}\n\nThis feature is coming soon!`);
+            } else {
+                if (confirm('Please sign in to book appointments. Go to login page?')) {
+                    window.location.href = 'index.html';
+                }
+            }
+        }
+
+        function viewProfile(doctorId) {
+            // In a real implementation, this would open a doctor's profile page
+            // For now, show a modal with doctor info
+            const doctorProfiles = {
+                'dr-imran-khares': {
+                    name: 'Dr. Imran Khares',
+                    specialty: 'Pediatrician',
+                    clinic: 'The Honeybee Children\'s Clinic',
+                    experience: '15+ years',
+                    education: 'MBChB, MMed (Paediatrics) - University of Nairobi',
+                    interests: ['Asthma & Allergy', 'Child Development', 'Vaccinology']
+                },
+                'yvonne-kariuki': {
+                    name: 'Dr. Yvonne M. Kariuki',
+                    specialty: 'General Pediatrics & Neonatology',
+                    clinic: 'Nairobi Women\'s Hospital, Hurlingham',
+                    experience: '12+ years',
+                    education: 'MBChB - Moi University, MMed (Paediatrics) - UoN',
+                    interests: ['Newborn Care', 'Developmental Screening', 'Nutrition']
+                },
+                'henry-nderitu': {
+                    name: 'Dr. Henry M. Nderitu',
+                    specialty: 'Pediatric Neurology',
+                    clinic: 'Kenyatta National Hospital',
+                    experience: '20+ years',
+                    education: 'MBChB, MMed, Fellowship in Pediatric Neurology',
+                    interests: ['Epilepsy', 'Neurodevelopmental Disorders', 'Neuromuscular Conditions']
+                },
+                'njoroge-wambugu': {
+                    name: 'Dr. Njoroge Wambugu',
+                    specialty: 'Consultant Pediatrician & Child Health Specialist',
+                    clinic: 'MP Shah Hospital, Parklands',
+                    experience: '18+ years',
+                    education: 'MBChB, MMed (Paediatrics), Fellowship in Child Health',
+                    interests: ['General Pediatrics', 'Adolescent Health', 'Preventive Care']
+                },
+                'susan-wamithi': {
+                    name: 'Dr. Susan Wamithi',
+                    specialty: 'Developmental Pediatrics',
+                    clinic: 'Aga Khan University Hospital',
+                    experience: '14+ years',
+                    education: 'MBChB, MMed, Certificate in Developmental-Behavioral Pediatrics',
+                    interests: ['Autism Spectrum', 'Developmental Delays', 'Behavioral Issues']
+                },
+                'dorothy-mbugua': {
+                    name: 'Dr. Dorothy Mbugua',
+                    specialty: 'Neonatologist',
+                    clinic: 'Kilimani Children\'s Clinic',
+                    experience: '16+ years',
+                    education: 'MBChB, MMed, Fellowship in Neonatology',
+                    interests: ['Premature Care', 'Newborn Resuscitation', 'Breastfeeding Support']
+                },
+                'moses-lango': {
+                    name: 'Dr. Moses Lango',
+                    specialty: 'General Pediatrician',
+                    clinic: 'Kilimani Children\'s Clinic',
+                    experience: '10+ years',
+                    education: 'MBChB, MMed (Paediatrics)',
+                    interests: ['Infectious Diseases', 'Growth Monitoring', 'Vaccinations']
+                },
+                'dr-kwamboka': {
+                    name: 'Dr. Kwamboka',
+                    specialty: 'Board Certified Pediatrician',
+                    clinic: 'Dr. Kwamboka\'s Pediatric Clinic, Westlands',
+                    experience: '10+ years',
+                    education: 'MBChB, MMed, Board Certified',
+                    interests: ['Child Development', 'Behavioral Pediatrics', 'Well-Child Care']
+                },
+                'bashir-admani': {
+                    name: 'Dr. Bashir Admani',
+                    specialty: 'Consultant Pediatrician',
+                    clinic: 'The Paediatric Clinic (Parklands & Karen)',
+                    experience: '20+ years',
+                    education: 'MBChB, MMed, FRCPCH',
+                    interests: ['General Pediatrics', 'Respiratory Medicine', 'Adolescent Health']
+                }
+            };
+            
+            const profile = doctorProfiles[doctorId];
+            
+            if (profile) {
+                let profileMessage = `👨‍⚕️ ${profile.name}\n`;
+                profileMessage += `📍 ${profile.specialty}\n`;
+                profileMessage += `🏥 ${profile.clinic}\n`;
+                profileMessage += `⏱️ Experience: ${profile.experience}\n`;
+                profileMessage += `🎓 ${profile.education}\n`;
+                profileMessage += `🔬 Special interests: ${profile.interests.join(', ')}\n\n`;
+                profileMessage += `📞 To book: Call clinic or use booking platform`;
+                
+                alert(profileMessage);
+            } else {
+                alert(`Profile information for this doctor will be available soon.`);
+            }
+        }
+</script>
+
+     <!-- ===== FIREBASE SETUP FOR HOME PAGE ===== -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+// YOUR FIREBASE CONFIG - NEW PROJECT ONLY!
+const firebaseConfig = {
+  apiKey: "AIzaSyAmL_Mv9YJM72FC2LLDvdluOUXUmMxQjc8",
+  authDomain: "littleexplorers-kenya.firebaseapp.com",
+  projectId: "littleexplorers-kenya",
+  storageBucket: "littleexplorers-kenya.firebasestorage.app",
+  messagingSenderId: "737872854301",
+  appId: "1:737872854301:web:18b6e0d163ddb9c2f5b5f4"
+};
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Admin emails list
+        const ADMIN_EMAILS = ['babuyayah@gmail.com', 'admin@littleexplorers.com'];
+
+        // Check auth state
+        onAuthStateChanged(auth, async (user) => {
+            const adminNavItem = document.getElementById('adminNavItem');
+            
+            if (user) {
+                console.log('User logged in:', user.email);
+                
+                // Update header to show user name
+                const accountBtn = document.querySelector('.account-btn');
+                if (accountBtn) {
+                    accountBtn.innerHTML = `<i class="fas fa-user"></i> ${user.email.split('@')[0]}`;
+                    accountBtn.href = "#";
+                    accountBtn.onclick = (e) => {
+                        e.preventDefault();
+                        if (confirm('Logout from LittleExplorers?')) {
+                            signOut(auth).then(() => {
+                                localStorage.removeItem('littleExplorers_currentUser');
+                                window.location.href = 'index.html';
+                            });
+                        }
+                    };
+                }
+                
+                // Check if user is admin
+                if (ADMIN_EMAILS.includes(user.email)) {
+                    adminNavItem.style.display = 'block';
+                    
+                    // Get user data from Firestore
+                    const userDoc = await getDoc(doc(db, "users", user.uid));
+                    if (userDoc.exists()) {
+                        console.log('Admin data loaded');
+                    }
+                }
+                       } else {
+                // Not logged in - DON'T redirect, just show sign in button
+                console.log('User not logged in');
+                const accountBtn = document.querySelector('.account-btn');
+                if (accountBtn) {
+                    accountBtn.innerHTML = '<i class="fas fa-user"></i> Sign In';
+                    accountBtn.href = 'index.html';
+                }
+            }
+        });
+
+        // Make logout available globally
+        window.logout = function() {
+            signOut(auth).then(() => {
+                localStorage.removeItem('littleExplorers_currentUser');
+                window.location.href = 'index.html';
+            });
+        };
+    </script>
+    <!-- Global Settings Panel -->
+<script src="settings-panel.js"></script>
+
+<script>
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedTheme = localStorage.getItem('adminTheme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+    });
+</script>
+    <!-- Global Search -->
+    <script src="search.js"></script>
+</body>
+</html>

@@ -1,0 +1,1188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>LittleExplorers | Welcome</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Your existing styles - keep them exactly as they are */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+      :root {
+    /* Light Theme (Default) */
+    --primary: #4ECDC4;
+    --secondary: #FF6B6B;
+    --accent: #FFD166;
+    --blue: #118AB2;
+    --purple: #9D6BFF;
+    --light: #F7FFF7;
+    --dark: #2A2D34;
+    --text: #333333;
+    --bg-primary: #F4F7FC;
+    --bg-secondary: white;
+    --card-bg: white;
+    --border-color: #e0e0e0;
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    --hover-bg: #f0f9f8;
+    --input-bg: white;
+    --success: #4CAF50;
+    --warning: #FF9800;
+    --danger: #F44336;
+    --info: #2196F3;
+    
+    /* Global Settings Variables */
+    --font-scale: 1;
+    --spacing-scale: 1;
+    --currency-symbol: 'KSh';
+    --shipping-rate: '150';
+    --animation-speed: 0.3s;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+    --primary: #5FD0C7;
+    --secondary: #FF8585;
+    --accent: #FFD966;
+    --blue: #3AA5D9;
+    --purple: #B58BFF;
+    --light: #2A2D34;
+    --dark: #F7FFF7;
+    --text: #E0E0E0;
+    --bg-primary: #1A1C20;
+    --bg-secondary: #2A2D34;
+    --card-bg: #2A2D34;
+    --border-color: #404040;
+    --shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    --hover-bg: #3A3D44;
+    --input-bg: #1A1C20;
+    
+    /* Global Settings Variables - Dark Mode */
+    --font-scale: 1;
+    --spacing-scale: 1;
+    --currency-symbol: 'KSh';
+    --shipping-rate: '150';
+    --animation-speed: 0.3s;
+}
+        
+      body {
+    background: var(--bg-primary);  /* ✅ CORRECT! */
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+    transition: background-color 0.3s, color 0.3s;
+}
+        
+        .background-bubbles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .bubble {
+            position: absolute;
+            background: rgba(78, 205, 196, 0.1);
+            border-radius: 50%;
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        .bubble1 {
+            width: 300px;
+            height: 300px;
+            top: -100px;
+            left: -100px;
+            background: rgba(255, 107, 107, 0.05);
+            animation-delay: 0s;
+        }
+        
+        .bubble2 {
+            width: 400px;
+            height: 400px;
+            bottom: -150px;
+            right: -100px;
+            background: rgba(78, 205, 196, 0.05);
+            animation-delay: 2s;
+        }
+        
+        .bubble3 {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 80%;
+            background: rgba(255, 209, 102, 0.08);
+            animation-delay: 4s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-30px) rotate(5deg); }
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 1300px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Baby Icon Animation */
+        .baby-mascot {
+            text-align: center;
+            margin-bottom: 30px;
+            position: relative;
+        }
+        
+        .baby-icon {
+            font-size: 120px;
+            display: inline-block;
+            transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            filter: drop-shadow(0 15px 25px rgba(78,205,196,0.3));
+            cursor: pointer;
+            animation: babyBounce 3s infinite ease-in-out;
+        }
+        
+        .baby-icon.frown {
+            color: #95a5a6;
+            transform: scale(0.9);
+        }
+        
+        .baby-icon.smile {
+            color: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        .baby-icon.wink {
+            color: var(--secondary);
+        }
+        
+        @keyframes babyBounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .baby-message {
+            font-size: 24px;
+            font-weight: 700;
+            margin-top: 15px;
+            color: var(--dark);
+            font-family: 'Nunito', sans-serif;
+            transition: all 0.3s;
+        }
+        
+        .baby-message.frown {
+            color: #95a5a6;
+        }
+        
+        .baby-message.smile {
+            color: var(--primary);
+        }
+                /* Main Auth Card */
+        .auth-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 60px;
+            box-shadow: var(--shadow);
+            padding: 50px;
+            max-width: 550px;
+            margin: 0 auto;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s;
+        }
+        
+        .auth-tabs {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 40px;
+            background: var(--hover-bg);
+            padding: 10px;
+            border-radius: 60px;
+        }
+        
+        .auth-tab {
+            flex: 1;
+            padding: 16px 25px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 18px;
+            background: transparent;
+            color: var(--text);
+            opacity: 0.6;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Nunito', sans-serif;
+        }
+        
+        .auth-tab.active {
+            background: var(--primary);
+            color: white;
+            opacity: 1;
+            box-shadow: 0 6px 15px rgba(78,205,196,0.3);
+        }
+        
+        .auth-form {
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+        
+        .auth-form.active {
+            display: block;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--text);
+            font-size: 15px;
+        }
+        
+        .input-icon {
+            position: relative;
+        }
+        
+        .input-icon i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text);
+            opacity: 0.5;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+        
+        .input-icon input {
+            width: 100%;
+            padding: 18px 20px 18px 55px;
+            border: 2px solid var(--border-color);
+            border-radius: 50px;
+            font-size: 16px;
+            font-family: 'Quicksand', sans-serif;
+            transition: all 0.3s;
+            background: var(--input-bg);
+            color: var(--text);
+        }
+        
+        .input-icon input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 5px rgba(78,205,196,0.1);
+        }
+        
+        .input-icon input:focus + i {
+            color: var(--primary);
+            opacity: 1;
+        }
+        
+        .location-badge {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--hover-bg);
+            padding: 12px 20px;
+            border-radius: 40px;
+            margin-top: 10px;
+            font-size: 14px;
+            color: var(--blue);
+        }
+        
+        .location-badge i {
+            color: var(--secondary);
+        }
+        
+        .btn-auth {
+            width: 100%;
+            background: linear-gradient(135deg, var(--primary), var(--blue));
+            color: white;
+            border: none;
+            padding: 20px 30px;
+            border-radius: 60px;
+            font-weight: 800;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            font-family: 'Nunito', sans-serif;
+            box-shadow: 0 10px 25px rgba(78,205,196,0.4);
+        }
+        
+        .btn-auth:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 35px rgba(78,205,196,0.5);
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 30px 0;
+            color: var(--text);
+            opacity: 0.6;
+        }
+        
+        .divider-line {
+            flex: 1;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+        }
+        
+        /* Social Login */
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .social-btn {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 30px;
+            padding: 16px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text);
+        }
+        
+        .social-btn i {
+            font-size: 28px;
+        }
+        
+        .social-btn:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.05);
+        }
+        
+        .social-btn.google i { color: #DB4437; }
+        .social-btn.microsoft i { color: #00A4EF; }
+        .social-btn.apple i { color: #000000; }
+        
+        /* Phone OTP Section */
+        .phone-verification {
+            background: var(--hover-bg);
+            border-radius: 40px;
+            padding: 25px;
+            margin-top: 25px;
+            border: 2px dashed var(--primary);
+            display: none;
+        }
+        
+        .phone-verification.show {
+            display: block;
+            animation: fadeIn 0.5s;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        .otp-inputs {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 25px 0;
+        }
+        
+        .otp-input {
+            width: 60px;
+            height: 70px;
+            border: 2px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 28px;
+            font-weight: 800;
+            text-align: center;
+            font-family: 'Nunito', sans-serif;
+            transition: 0.3s;
+            background: var(--input-bg);
+            color: var(--text);
+        }
+        
+        .otp-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(78,205,196,0.2);
+        }
+        
+        .btn-otp {
+            background: var(--accent);
+            color: var(--dark);
+            border: none;
+            padding: 16px 30px;
+            border-radius: 50px;
+            font-weight: 700;
+            width: 100%;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+        
+        .btn-otp:hover {
+            background: #FFC107;
+            transform: translateY(-2px);
+        }
+        
+        .timer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 15px;
+            color: var(--text);
+            opacity: 0.7;
+        }
+        
+        /* Responsive */
+        @media (max-width: 600px) {
+            .auth-card {
+                padding: 30px 20px;
+            }
+            
+            .social-login {
+                grid-template-columns: 1fr;
+            }
+            
+            .otp-inputs {
+                gap: 8px;
+            }
+            
+            .otp-input {
+                width: 45px;
+                height: 55px;
+                font-size: 24px;
+            }
+            
+            .baby-icon {
+                font-size: 100px;
+            }
+        }
+        
+        /* Terms */
+        .terms {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 14px;
+            color: var(--text);
+            opacity: 0.7;
+        }
+        
+        .terms a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        
+        /* Location Detection */
+        .location-detect {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 13px;
+            color: var(--blue);
+            margin-bottom: 20px;
+            padding: 12px 18px;
+            background: var(--hover-bg);
+            border-radius: 40px;
+        }
+        
+        /* Success Animation */
+        @keyframes clap {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+        
+        .clap {
+            animation: clap 0.5s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Bubbles -->
+    <div class="background-bubbles">
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+    </div>
+
+    <div class="container">
+        <!-- Baby Mascot with Dynamic Expression -->
+        <div class="baby-mascot">
+            <div class="baby-icon frown" id="babyIcon">
+                <i class="fas fa-frown" id="babyFace"></i>
+            </div>
+            <div class="baby-message frown" id="babyMessage">
+                Hi! Please create an account or sign in 👋
+            </div>
+        </div>
+
+        <!-- Main Authentication Card -->
+        <div class="auth-card">
+            <!-- Tabs: Sign In / Register -->
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="signinTab" onclick="switchTab('signin')">Sign In</button>
+                <button class="auth-tab" id="registerTab" onclick="switchTab('register')">Create Account</button>
+            </div>
+
+            <!-- ===== SIGN IN FORM ===== -->
+            <div class="auth-form active" id="signinForm">
+                <!-- Location Based Detection -->
+                <div class="location-detect" id="locationDetect">
+                    <i class="fas fa-map-marker-alt" style="color: var(--secondary);"></i>
+                    <span id="locationText">Detecting your location...</span>
+                </div>
+
+                <form onsubmit="signIn(event)">
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <div class="input-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="signinEmail" placeholder="e.g., mama@example.com" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-icon" style="position: relative;">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="signinPassword" placeholder="Enter your password" required style="padding-right: 50px;">
+                            <span class="password-toggle" onclick="togglePassword('signinPassword', this)" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #999;">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-sign-in-alt"></i> Sign In
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span class="divider-line"></span>
+                    <span>or continue with</span>
+                    <span class="divider-line"></span>
+                </div>
+
+                <!-- Social Login - Sign In -->
+                <div class="social-login">
+                    <div class="social-btn google" onclick="socialSignIn('google')">
+                        <i class="fab fa-google"></i>
+                        <span>Google</span>
+                    </div>
+                    <div class="social-btn microsoft" onclick="socialSignIn('microsoft')">
+                        <i class="fab fa-microsoft"></i>
+                        <span>Microsoft</span>
+                    </div>
+                    <div class="social-btn apple" onclick="socialSignIn('apple')">
+                        <i class="fab fa-apple"></i>
+                        <span>Apple</span>
+                    </div>
+                </div>
+
+                <!-- Phone Verification -->
+                <div class="phone-verification" id="signinPhoneVerification">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <div style="width: 50px; height: 50px; background: var(--primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Verify Your Phone</h4>
+                            <p style="font-size: 14px; color: #666;">We need your phone number for payment verification</p>
+                        </div>
+                    </div>
+                    
+                    <div class="input-icon" style="margin-bottom: 20px;">
+                        <i class="fas fa-phone-alt"></i>
+                        <input type="tel" id="signinPhone" placeholder="Enter phone number (e.g., 0712 345 678)" value="+254">
+                    </div>
+
+                    <button class="btn-otp" onclick="sendOTP('signin')">
+                        <i class="fas fa-paper-plane"></i> Send OTP
+                    </button>
+
+                    <div class="otp-inputs" id="signinOtpSection" style="display: none;">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'signin2')" id="signin1">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'signin3')" id="signin2">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'signin4')" id="signin3">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'signin5')" id="signin4">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'signin6')" id="signin5">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="verifyOTP('signin')" id="signin6">
+                    </div>
+                    
+                    <div class="timer" id="signinTimer"></div>
+                </div>
+            </div>
+
+            <!-- ===== REGISTER FORM ===== -->
+            <div class="auth-form" id="registerForm">
+                <form onsubmit="register(event)">
+                    <div class="form-group">
+                        <label>Full Name</label>
+                        <div class="input-icon">
+                            <i class="fas fa-user"></i>
+                            <input type="text" id="registerName" placeholder="e.g., Sarah Mwangi" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Email Address</label>
+                        <div class="input-icon">
+                            <i class="fas fa-envelope"></i>
+                            <input type="email" id="registerEmail" placeholder="sarah@example.com" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Phone Number</label>
+                        <div class="input-icon">
+                            <i class="fas fa-phone-alt"></i>
+                            <input type="tel" id="registerPhone" placeholder="e.g., 0712 345 678" value="+254" required>
+                        </div>
+                        <div class="location-badge">
+                            <i class="fas fa-check-circle"></i> Phone will be used for OTP and payments
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Password</label>
+                        <div class="input-icon" style="position: relative;">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="registerPassword" placeholder="Create a password" required style="padding-right: 50px;">
+                            <span class="password-toggle" onclick="togglePassword('registerPassword', this)" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #999;">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Confirm Password</label>
+                        <div class="input-icon" style="position: relative;">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="registerConfirmPassword" placeholder="Confirm your password" required style="padding-right: 50px;">
+                            <span class="password-toggle" onclick="togglePassword('registerConfirmPassword', this)" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); cursor: pointer; color: #999;">
+                                <i class="fas fa-eye"></i>
+                            </span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-auth">
+                        <i class="fas fa-user-plus"></i> Create Account
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span class="divider-line"></span>
+                    <span>or sign up with</span>
+                    <span class="divider-line"></span>
+                </div>
+
+                <!-- Social Sign Up -->
+                <div class="social-login">
+                    <div class="social-btn google" onclick="socialSignIn('google')">
+                        <i class="fab fa-google"></i>
+                        <span>Google</span>
+                    </div>
+                    <div class="social-btn microsoft" onclick="socialSignIn('microsoft')">
+                        <i class="fab fa-microsoft"></i>
+                        <span>Microsoft</span>
+                    </div>
+                    <div class="social-btn apple" onclick="socialSignIn('apple')">
+                        <i class="fab fa-apple"></i>
+                        <span>Apple</span>
+                    </div>
+                </div>
+
+                <!-- Phone OTP Verification for Registration -->
+                <div class="phone-verification" id="registerPhoneVerification">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                        <div style="width: 50px; height: 50px; background: var(--secondary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div>
+                            <h4 style="margin-bottom: 5px;">Verify Your Phone Number</h4>
+                            <p style="font-size: 14px; color: #666;">We'll send a 6-digit OTP to verify your number</p>
+                        </div>
+                    </div>
+
+                    <button class="btn-otp" onclick="sendOTP('register')">
+                        <i class="fas fa-paper-plane"></i> Send Verification Code
+                    </button>
+
+                    <div class="otp-inputs" id="registerOtpSection" style="display: none; margin-top: 25px;">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'register2')" id="register1">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'register3')" id="register2">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'register4')" id="register3">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'register5')" id="register4">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="moveToNext(this, 'register6')" id="register5">
+                        <input type="text" class="otp-input" maxlength="1" onkeyup="verifyOTP('register')" id="register6">
+                    </div>
+                    
+                    <div class="timer" id="registerTimer"></div>
+                </div>
+            </div>
+
+            <div class="terms">
+                By continuing, you agree to LittleExplorers' 
+                <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.
+            </div>
+        </div>
+    </div>
+<script>
+        
+        // ===== BABY EXPRESSION ANIMATION =====
+        function babyFrown() {
+            const babyIcon = document.getElementById('babyIcon');
+            const babyFace = document.getElementById('babyFace');
+            const babyMessage = document.getElementById('babyMessage');
+            
+            babyIcon.classList.remove('smile', 'wink');
+            babyIcon.classList.add('frown');
+            babyFace.className = 'fas fa-frown';
+            babyMessage.classList.remove('smile');
+            babyMessage.classList.add('frown');
+            babyMessage.textContent = 'Aww, please create an account or sign in 🥺';
+        }
+        
+        function babySmile(name = 'there') {
+            const babyIcon = document.getElementById('babyIcon');
+            const babyFace = document.getElementById('babyFace');
+            const babyMessage = document.getElementById('babyMessage');
+            
+            babyIcon.classList.remove('frown');
+            babyIcon.classList.add('smile');
+            babyFace.className = 'fas fa-smile-wink';
+            babyMessage.classList.remove('frown');
+            babyMessage.classList.add('smile');
+            babyMessage.textContent = `Welcome, ${name}! So happy to see you! 🎉`;
+            
+            babyIcon.classList.add('clap');
+            setTimeout(() => babyIcon.classList.remove('clap'), 500);
+        }
+
+        // ===== LOCATION DETECTION =====
+        function detectLocation() {
+            const locationText = document.getElementById('locationText');
+            
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    function(position) {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        
+                        let country = '';
+                        if (lat > -5 && lat < 5 && lng > 30 && lng < 42) {
+                            country = 'Kenya';
+                        } else {
+                            country = 'International';
+                        }
+                        
+                        locationText.innerHTML = `<i class="fas fa-check-circle" style="color: var(--success);"></i> Detected: ${country} (${lat.toFixed(2)}, ${lng.toFixed(2)})`;
+                        
+                        const phoneInputs = document.querySelectorAll('input[type="tel"]');
+                        if (country === 'Kenya') {
+                            phoneInputs.forEach(input => input.value = '+254');
+                        }
+                    },
+                    function(error) {
+                        locationText.innerHTML = '<i class="fas fa-exclamation-triangle" style="color: var(--warning);"></i> Location access denied. Please select manually.';
+                    }
+                );
+            } else {
+                locationText.innerHTML = '<i class="fas fa-globe"></i> Location not supported. Default: Kenya';
+            }
+        }
+
+        // ===== SWITCH BETWEEN SIGN IN AND REGISTER =====
+        function switchTab(tab) {
+            const signinTab = document.getElementById('signinTab');
+            const registerTab = document.getElementById('registerTab');
+            const signinForm = document.getElementById('signinForm');
+            const registerForm = document.getElementById('registerForm');
+            
+            if (tab === 'signin') {
+                signinTab.classList.add('active');
+                registerTab.classList.remove('active');
+                signinForm.classList.add('active');
+                registerForm.classList.remove('active');
+            } else {
+                registerTab.classList.add('active');
+                signinTab.classList.remove('active');
+                registerForm.classList.add('active');
+                signinForm.classList.remove('active');
+            }
+            
+            babyFrown();
+        }
+
+        // ===== SIGN IN - READY FOR FIREBASE INTEGRATION =====
+        function signIn(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('signinEmail').value;
+            const password = document.getElementById('signinPassword').value;
+            
+            // TODO: Add Firebase sign-in code here
+            console.log('Sign in attempt with:', email);
+            
+            // Placeholder for successful sign-in
+            alert('Sign in functionality will be connected to Firebase soon!');
+            
+            // Clear password field
+            document.getElementById('signinPassword').value = '';
+        }
+
+        // ===== REGISTER - READY FOR FIREBASE INTEGRATION =====
+        function register(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            // Basic validation
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters long');
+                return;
+            }
+            
+            // TODO: Add Firebase registration code here
+            console.log('Registration attempt for:', email);
+            
+            // Placeholder for successful registration
+            alert('Registration will be connected to Firebase soon!');
+            
+            // Clear password fields
+            document.getElementById('registerPassword').value = '';
+            document.getElementById('registerConfirmPassword').value = '';
+        }
+
+        // ===== SOCIAL SIGN IN - READY FOR FIREBASE INTEGRATION =====
+        function socialSignIn(provider) {
+            // TODO: Add Firebase social sign-in code here
+            console.log(`Social sign in with: ${provider}`);
+            alert(`Sign in with ${provider} will be available after Firebase setup!`);
+        }
+
+        // ===== PASSWORD RESET - READY FOR FIREBASE INTEGRATION =====
+        function resetPassword() {
+            const email = document.getElementById('signinEmail').value;
+            
+            if (!email) {
+                alert('Please enter your email address first.');
+                return;
+            }
+            
+            // TODO: Add Firebase password reset code here
+            console.log('Password reset for:', email);
+            alert('Password reset functionality will be available after Firebase setup!');
+        }
+
+        // ===== TOGGLE PASSWORD VISIBILITY =====
+        function togglePassword(inputId, element) {
+            const input = document.getElementById(inputId);
+            const icon = element.querySelector('i');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.className = 'fas fa-eye-slash';
+            } else {
+                input.type = 'password';
+                icon.className = 'fas fa-eye';
+            }
+        }
+
+        // ===== MOVE TO NEXT OTP INPUT =====
+        function moveToNext(current, nextId) {
+            if (current.value.length >= 1) {
+                const next = document.getElementById(nextId);
+                if (next) {
+                    next.focus();
+                }
+            }
+        }
+
+        // ===== SEND OTP (placeholder) =====
+        function sendOTP(type) {
+            alert('📱 OTP verification coming soon! Use email sign-in for now.');
+        }
+
+        // ===== VERIFY OTP (placeholder) =====
+        function verifyOTP(type) {
+            alert('✅ OTP verification coming soon!');
+        }
+
+        // ===== CHECK IF USER IS LOGGED IN - READY FOR FIREBASE =====
+        function checkAuthState() {
+            // TODO: Add Firebase auth state check here
+            console.log('Auth state will be checked after Firebase setup');
+        }
+
+        // ===== INITIALIZE =====
+        document.addEventListener('DOMContentLoaded', function() {
+            babyFrown();
+            detectLocation();
+            
+            // Initialize OTP inputs
+            const otpInputs = document.querySelectorAll('.otp-input');
+            otpInputs.forEach(input => {
+                input.addEventListener('keydown', function(e) {
+                    if (e.key === 'Backspace' && this.value === '') {
+                        const prev = this.previousElementSibling;
+                        if (prev) {
+                            prev.focus();
+                        }
+                    }
+                });
+            });
+            
+            // Check auth state on load
+            checkAuthState();
+        });
+    </script>
+        <!-- ===== FIREBASE SETUP - ADD THIS ===== -->
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+
+        // YOUR NEW FIREBASE CONFIG
+        const firebaseConfig = {
+            apiKey: "AIzaSyAmL_Mv9YJM72FC2LLDvdluOUXUmMxQjc8",
+            authDomain: "littleexplorers-kenya.firebaseapp.com",
+            projectId: "littleexplorers-kenya",
+            storageBucket: "littleexplorers-kenya.firebasestorage.app",
+            messagingSenderId: "737872854301",
+            appId: "1:737872854301:web:18b6e0d163ddb9c2f5b5f4"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // Make available globally
+        window.auth = auth;
+        window.db = db;
+        window.createUserWithEmailAndPassword = createUserWithEmailAndPassword;
+        window.signInWithEmailAndPassword = signInWithEmailAndPassword;
+        window.doc = doc;
+        window.setDoc = setDoc;
+        window.getDoc = getDoc;
+        window.serverTimestamp = serverTimestamp;
+
+        console.log("🔥 Firebase connected!");
+
+        // ===== REPLACE THE SIGN IN FUNCTION =====
+        window.signIn = async function(event) {
+            event.preventDefault();
+            
+            const email = document.getElementById('signinEmail').value;
+            const password = document.getElementById('signinPassword').value;
+            
+            try {
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Get user data
+                const userDoc = await getDoc(doc(db, "users", user.uid));
+                let userName = email.split('@')[0];
+                if (userDoc.exists() && userDoc.data().name) {
+                    userName = userDoc.data().name;
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('littleExplorers_currentUser', JSON.stringify({
+                    uid: user.uid,
+                    email: user.email,
+                    name: userName
+                }));
+                
+                babySmile(userName);
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Sign in error:', error);
+                document.getElementById('signinPassword').value = '';
+                
+                let errorMessage = '❌ ';
+                if (error.code === 'auth/user-not-found' || error.code === 'auth/wrong-password') {
+                    errorMessage += 'Invalid email or password.';
+                } else {
+                    errorMessage += error.message;
+                }
+                alert(errorMessage);
+                babyFrown();
+            }
+        };
+
+        // ===== REPLACE THE REGISTER FUNCTION =====
+        window.register = async function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById('registerName').value;
+            const email = document.getElementById('registerEmail').value;
+            const phone = document.getElementById('registerPhone').value;
+            const password = document.getElementById('registerPassword').value;
+            const confirmPassword = document.getElementById('registerConfirmPassword').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                return;
+            }
+            
+            if (password.length < 6) {
+                alert('Password must be at least 6 characters');
+                return;
+            }
+            
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+                const user = userCredential.user;
+                
+                // Save to Firestore
+                await setDoc(doc(db, "users", user.uid), {
+                    name: name,
+                    email: email,
+                    phone: phone,
+                    createdAt: serverTimestamp(),
+                    uid: user.uid,
+                    role: 'user'
+                });
+                
+                // Save to localStorage
+                localStorage.setItem('littleExplorers_currentUser', JSON.stringify({
+                    uid: user.uid,
+                    email: user.email,
+                    name: name,
+                    phone: phone
+                }));
+                
+                babySmile(name);
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Registration error:', error);
+                
+                let errorMessage = '❌ ';
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage += 'Email already registered.';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage += 'Password too weak.';
+                } else {
+                    errorMessage += error.message;
+                }
+                alert(errorMessage);
+            }
+        };
+
+        // ===== REPLACE THE SOCIAL SIGN IN FUNCTION =====
+        window.socialSignIn = async function(provider) {
+            try {
+                const { GoogleAuthProvider, signInWithPopup } = await import("https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js");
+                const authProvider = new GoogleAuthProvider();
+                const result = await signInWithPopup(auth, authProvider);
+                const user = result.user;
+                
+                // Check if user exists
+                const userRef = doc(db, "users", user.uid);
+                const userSnap = await getDoc(userRef);
+                
+                if (!userSnap.exists()) {
+                    await setDoc(userRef, {
+                        name: user.displayName || 'Google User',
+                        email: user.email,
+                        createdAt: serverTimestamp(),
+                        uid: user.uid,
+                        role: 'user'
+                    });
+                }
+                
+                localStorage.setItem('littleExplorers_currentUser', JSON.stringify({
+                    uid: user.uid,
+                    email: user.email,
+                    name: user.displayName || user.email.split('@')[0]
+                }));
+                
+                babySmile(user.displayName || 'there');
+                setTimeout(() => {
+                    window.location.href = 'home.html';
+                }, 1500);
+                
+            } catch (error) {
+                console.error('Social sign-in error:', error);
+                alert('❌ Error: ' + error.message);
+            }
+            
+        };
+        
+    </script>
+    <!-- Global Settings Panel -->
+<script src="settings-panel.js"></script>
+
+<script>
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedTheme = localStorage.getItem('adminTheme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+    });
+</script>
+    <!-- Global Search -->
+    <script src="search.js"></script>
+</body>
+</html>

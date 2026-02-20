@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LittleExplorers | Resources</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+            * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
+        
+        :root {
+            /* Light Theme (Default) */
+            --primary: #4ECDC4;
+            --secondary: #FF6B6B;
+            --accent: #FFD166;
+            --blue: #118AB2;
+            --purple: #9D6BFF;
+            --light: #F7FFF7;
+            --dark: #2A2D34;
+            --text: #333333;
+            --bg-primary: #F4F7FC;
+            --bg-secondary: white;
+            --card-bg: white;
+            --border-color: #e0e0e0;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+            --hover-bg: #f0f9f8;
+            --input-bg: white;
+            --success: #4CAF50;
+            --warning: #FF9800;
+            --danger: #F44336;
+            --info: #2196F3;
+            
+            /* Global Settings Variables */
+            --font-scale: 1;
+            --spacing-scale: 1;
+            --currency-symbol: 'KSh';
+            --shipping-rate: '150';
+            --animation-speed: 0.3s;
+        }
+
+        /* Dark Theme */
+        [data-theme="dark"] {
+            --primary: #5FD0C7;
+            --secondary: #FF8585;
+            --accent: #FFD966;
+            --blue: #3AA5D9;
+            --purple: #B58BFF;
+            --light: #2A2D34;
+            --dark: #F7FFF7;
+            --text: #E0E0E0;
+            --bg-primary: #1A1C20;
+            --bg-secondary: #2A2D34;
+            --card-bg: #2A2D34;
+            --border-color: #404040;
+            --shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+            --hover-bg: #3A3D44;
+            --input-bg: #1A1C20;
+            
+            /* Global Settings Variables - Dark Mode */
+            --font-scale: 1;
+            --spacing-scale: 1;
+            --currency-symbol: 'KSh';
+            --shipping-rate: '150';
+            --animation-speed: 0.3s;
+        }
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text);
+            line-height: 1.6;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: var(--bg-secondary);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Nunito', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo i {
+            color: var(--secondary);
+        }
+        
+        .back-home {
+            background: var(--hover-bg);
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: 1px solid var(--border-color);
+        }
+        
+        .back-home:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .resource-section {
+            padding: 60px 0;
+            border-bottom: 2px dashed var(--border-color);
+        }
+        
+        .resource-section:last-of-type {
+            border-bottom: none;
+        }
+        
+        .resource-section h2 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 36px;
+            font-weight: 800;
+            color: var(--text);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .resource-card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            transition: transform 0.3s, border-color 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+        }
+        
+        .resource-card h3 {
+            font-size: 20px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: var(--text);
+        }
+        
+        .resource-card p {
+            color: var(--text);
+            opacity: 0.7;
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+        
+        .resource-card a {
+            color: var(--primary);
+            font-weight: 700;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: gap 0.3s;
+        }
+        
+        .resource-card a:hover {
+            gap: 12px;
+            color: var(--secondary);
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: var(--primary);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+            border: none;
+        }
+        
+        .back-to-top:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+            
+            .resource-section h2 {
+                font-size: 28px;
+            }
+            
+            .resource-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+   
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <a href="home.html" class="logo">
+                <i class="fas fa-child"></i> LittleExplorers
+            </a>
+            <a href="home.html" class="back-home">
+                <i class="fas fa-arrow-left"></i> Back to Home
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Development Guides -->
+        <section id="development-guides" class="resource-section">
+            <h2><i class="fas fa-book" style="color: var(--primary);"></i> Development Guides</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>0-12 Months: Sensory Development</h3>
+                    <p>Complete guide to visual tracking, reaching, and sensory exploration. Learn about tummy time, high-contrast images, and safe sensory play.</p>
+                    <a href="#"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="resource-card">
+                    <h3>1-3 Years: Language Milestones</h3>
+                    <p>Speech development, first words, and communication tips. Understand babbling, first words, and how to encourage language growth.</p>
+                    <a href="#"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="resource-card">
+                    <h3>3-5 Years: Pre-K Readiness</h3>
+                    <p>Getting ready for school: cognitive and social skills. Learn about letter recognition, counting, and social-emotional development.</p>
+                    <a href="#"><span>Read More</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expert Advice -->
+        <section id="expert-advice" class="resource-section">
+            <h2><i class="fas fa-star" style="color: var(--accent);"></i> Expert Advice</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>Dr. Sarah Kimani, Pediatrician</h3>
+                    <p>Sleep training tips for newborns and toddlers. Learn about establishing routines, safe sleep practices, and handling sleep regressions.</p>
+                    <a href="#"><span>Read Article</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="resource-card">
+                    <h3>Dr. James Mwangi, Child Psychologist</h3>
+                    <p>Understanding tantrums and emotional regulation. Strategies for helping children identify and express emotions appropriately.</p>
+                    <a href="#"><span>Read Article</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="resource-card">
+                    <h3>Dr. Mary Wanjiku, Nutritionist</h3>
+                    <p>Introducing solid foods: a step-by-step guide. Learn about signs of readiness, first foods, and allergy introduction.</p>
+                    <a href="#"><span>Read Article</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning Activities -->
+        <section id="learning-activities" class="resource-section">
+            <h2><i class="fas fa-puzzle-piece" style="color: var(--purple);"></i> Learning Activities</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>Sensory Play: Homemade Playdough</h3>
+                    <p>Easy, no-cook recipe for sensory exploration. Includes variations for colors, scents, and textures.</p>
+                    <a href="#"><span>Get Recipe</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="resource-card">
+                    <h3>Fine Motor: Bead Threading</h3>
+                    <p>Simple activity for hand-eye coordination and concentration. Suitable for ages 2+ with supervision.</p>
+                    <a href="#"><span>View Activity</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="resource-card">
+                    <h3>Outdoor: Nature Scavenger Hunt</h3>
+                    <p>Printable scavenger hunt lists for outdoor exploration and vocabulary building.</p>
+                    <a href="#"><span>Download PDF</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Safety -->
+        <section id="product-safety" class="resource-section">
+            <h2><i class="fas fa-shield" style="color: var(--secondary);"></i> Product Safety</h2>
+            <div class="resource-grid">
+                <div class="resource-card">
+                    <h3>Safety Standards Guide</h3>
+                    <p>Understanding EN71, ASTM, and CE certifications. What these labels mean and why they matter for your child's safety.</p>
+                    <a href="#"><span>Learn More</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="resource-card">
+                    <h3>Recalls & Alerts</h3>
+                    <p>Stay updated on product safety recalls. Subscribe to receive notifications about recalled children's products.</p>
+                    <a href="#"><span>View Recalls</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="resource-card">
+                    <h3>Age Appropriateness Guide</h3>
+                    <p>How to choose toys based on developmental stages rather than just age labels.</p>
+                    <a href="#"><span>Read Guide</span> <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <button class="back-to-top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Simple script for any interactive elements -->
+    <script>
+        // Add active state to navigation if needed
+        document.addEventListener('DOMContentLoaded', function() {
+            // Smooth scroll for anchor links if any are added
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+
+    <!-- ===== PLACEHOLDER FOR FIREBASE SETUP ===== -->
+    <!-- TODO: Add your Firebase configuration here when ready -->
+    <!-- 
+    <script type="module">
+        // Import Firebase modules
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-app.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-auth.js";
+        import { getFirestore } from "https://www.gstatic.com/firebasejs/12.9.0/firebase-firestore.js";
+        
+        // YOUR FIREBASE CONFIG - NEW PROJECT ONLY!
+const firebaseConfig = {
+  apiKey: "AIzaSyAmL_Mv9YJM72FC2LLDvdluOUXUmMxQjc8",
+  authDomain: "littleexplorers-kenya.firebaseapp.com",
+  projectId: "littleexplorers-kenya",
+  storageBucket: "littleexplorers-kenya.firebasestorage.app",
+  messagingSenderId: "737872854301",
+  appId: "1:737872854301:web:18b6e0d163ddb9c2f5b5f4"
+};
+        
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        console.log("Firebase initialized");
+    </script>
+    -->
+    <!-- Global Settings Panel -->
+<script src="settings-panel.js"></script>
+
+<script>
+    // Load saved theme on page load
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedTheme = localStorage.getItem('adminTheme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+    });
+</script>
+    <!-- Global Search -->
+    <script src="search.js"></script>
+</body>
+</html>
